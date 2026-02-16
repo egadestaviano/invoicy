@@ -9,7 +9,7 @@
             IG
           </div>
           <span class="text-xl font-semibold text-green-600">
-            Invoice Generator
+            Invoicy
           </span>
         </div>
         <p class="text-sm text-gray-600">
@@ -43,7 +43,7 @@
   <!-- Bagian bawah: copyright -->
   <div class="bg-green-500">
     <div class="max-w-[1024px] mx-auto text-center text-white text-sm py-3 px-6 md:px-0">
-      © 2025 Invoice Generator. All rights reserved.
+      © 2025 Invoicy. All rights reserved.
     </div>
   </div>
 </footer>

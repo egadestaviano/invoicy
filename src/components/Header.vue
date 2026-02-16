@@ -9,7 +9,7 @@
           IG
         </div>
         <span class="text-xl font-semibold text-white">
-          Invoice Generator
+          Invoicy
         </span>
       </div>
 
