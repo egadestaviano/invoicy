@@ -1,104 +1,172 @@
 <template>
   <Header />
 
-  <form @submit.prevent="submitForm" class="max-w-5xl mx-auto p-6 bg-white border-l border-r border-l-green-500 border-r-green-500 space-y-6">
-    <h1 class="text-2xl font-bold text-gray-800">Create Invoice</h1>
+  <!-- Page Title -->
+  <div class="max-w-5xl mx-auto px-4 md:px-6 pt-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+      <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+        Create Invoice
+      </h1>
+      <div class="text-sm text-gray-500">
+        Fill the details and generate a downloadable PDF invoice
+      </div>
+    </div>
+  </div>
+
+  <form @submit.prevent="submitForm" class="max-w-5xl mx-auto px-4 md:px-6 py-8 space-y-6">
 
     <!-- Invoice Info -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div>
-        <label class="form-label">Invoice Number</label>
-        <input v-model="form.invoice_number" type="text" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Process Date</label>
-        <input v-model="form.process_date" type="date" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Due Date</label>
-        <input v-model="form.due_date" type="date" class="form-input" />
+    <div class="section-card">
+      <div class="section-title">📄 Invoice Information</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="form-label">Invoice Number</label>
+          <input v-model="form.invoice_number" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Process Date</label>
+          <input v-model="form.process_date" type="date" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Due Date</label>
+          <input v-model="form.due_date" type="date" class="form-input" />
+        </div>
       </div>
     </div>
 
     <!-- Customer Info -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label class="form-label">Customer Name</label>
-        <input v-model="form.customer_name" type="text" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Customer ID</label>
-        <input v-model="form.customer_id" type="text" class="form-input" />
-      </div>
-      <div class="md:col-span-2">
-        <label class="form-label">Customer Address</label>
-        <textarea v-model="form.customer_address" class="form-input"></textarea>
+    <div class="section-card">
+      <div class="section-title">👤 Customer Details</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="form-label">Customer Name</label>
+          <input v-model="form.customer_name" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Customer ID</label>
+          <input v-model="form.customer_id" type="text" class="form-input" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="form-label">Customer Address</label>
+          <textarea v-model="form.customer_address" class="form-input"></textarea>
+        </div>
       </div>
     </div>
 
     <!-- Contact Info -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div>
-        <label class="form-label">Previous Balance</label>
-        <input v-model.number="form.previous_balance" type="number" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Contact Person</label>
-        <input v-model="form.contact_person" type="text" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Contact Phone</label>
-        <input v-model="form.contact_phone" type="text" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Payment Account</label>
-        <input v-model="form.payment_account" type="text" class="form-input" />
-      </div>
-      <div>
-        <label class="form-label">Contact Email</label>
-        <input v-model="form.contact_email" type="email" class="form-input" />
+    <div class="section-card">
+      <div class="section-title">☎ Contact & Payment</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="form-label">Previous Balance</label>
+          <input v-model.number="form.previous_balance" type="number" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Contact Person</label>
+          <input v-model="form.contact_person" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Contact Phone</label>
+          <input v-model="form.contact_phone" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Payment Account</label>
+          <input v-model="form.payment_account" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Contact Email</label>
+          <input v-model="form.contact_email" type="email" class="form-input" />
+        </div>
       </div>
     </div>
 
     <!-- Notes -->
-    <div>
-      <label class="form-label">Notes</label>
+    <div class="section-card">
+      <div class="section-title">📝 Notes</div>
       <textarea v-model="form.notes" class="form-input"></textarea>
     </div>
 
-    <!-- Image Paths -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label class="form-label">Signature</label>
-        <canvas ref="signatureCanvas" class="border w-full h-40 bg-white cursor-crosshair touch-none" style="touch-action: none;"></canvas>
-        <div class="mt-2 space-x-2">
-          <button type="button" @click="clearSignature" class="px-3 py-1 bg-gray-300 hover:bg-gray-400">Clear</button>
-          <button type="button" @click="saveSignature" class="px-3 py-1 bg-green-500 text-white hover:bg-green-600">Save</button>
+    <!-- Signature & Logo -->
+    <div class="section-card">
+      <div class="section-title">🖊 Branding & Signature</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Signature -->
+        <div>
+          <label class="form-label">Signature</label>
+
+          <canvas
+            ref="signatureCanvas"
+            class="w-full h-40 bg-white rounded-xl border-2 border-dashed border-gray-300 cursor-crosshair touch-none shadow-inner">
+          </canvas>
+
+          <div class="mt-3 flex gap-2">
+            <button type="button"
+              @click="clearSignature"
+              class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700">
+              Clear
+            </button>
+
+            <button type="button"
+              @click="saveSignature"
+              class="px-4 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-medium shadow-sm">
+              Save Signature
+            </button>
+          </div>
+
+          <div v-if="form.signature_image_path" class="mt-3">
+            <p class="text-sm text-gray-600 mb-1">Preview:</p>
+            <img :src="form.signature_image_path" class="h-20 object-contain border rounded-md" />
+          </div>
         </div>
-        <div v-if="form.signature_image_path" class="mt-2">
-          <p class="text-sm text-gray-600 mb-1">Signature Preview:</p>
-          <img :src="form.signature_image_path" alt="Signature Preview" class="h-20 object-contain border" />
+
+        <!-- Logo -->
+        <div>
+          <label class="form-label">Logo</label>
+
+          <input
+            ref="logoFileInput"
+            type="file"
+            @change="handleLogoUpload"
+            accept=".jpg,.jpeg,.png,.gif"
+            class="form-input" />
+
+          <div v-if="form.logo_preview" class="mt-3">
+            <p class="text-sm text-gray-600 mb-1">Preview:</p>
+            <img :src="form.logo_preview" class="h-20 object-contain border rounded-md" />
+
+            <button
+              type="button"
+              @click="clearLogo"
+              class="mt-2 px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md">
+              Remove Logo
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <label class="form-label">Logo</label>
-        <input ref="logoFileInput" type="file" @change="handleLogoUpload" accept=".jpg,.jpeg,.png,.gif" class="form-input" />
-        <div v-if="form.logo_preview" class="mt-2">
-          <p class="text-sm text-gray-600 mb-1">Logo Preview:</p>
-          <img :src="form.logo_preview" alt="Logo Preview" class="h-20 object-contain border" />
-          <button type="button" @click="clearLogo" class="mt-2 px-3 py-1 bg-red-500 text-white hover:bg-red-600 text-sm">
-            Remove Logo
-          </button>
-        </div>
+
       </div>
     </div>
 
-    <!-- Items Table -->
-    <div>
-      <h3 class="text-lg font-semibold text-gray-700 mb-2">Items</h3>
+    <!-- Items -->
+    <div class="section-card">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-lg font-bold text-gray-700">Items</h3>
+
+        <button
+          type="button"
+          @click="addItem"
+          class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-medium shadow-sm">
+          + Add Item
+        </button>
+      </div>
+
       <div class="overflow-x-auto">
-        <table class="min-w-full border border-gray-200 text-sm">
-          <thead class="bg-gray-100 text-gray-700">
+        <table class="min-w-full border border-gray-200 text-sm rounded-xl overflow-hidden">
+          <thead class="bg-orange-50 text-orange-800">
             <tr>
               <th class="table-th">Name</th>
               <th class="table-th">Description</th>
@@ -109,8 +177,9 @@
               <th class="table-th w-12"></th>
             </tr>
           </thead>
+
           <tbody>
-            <tr v-for="(item, index) in form.items" :key="index" class="hover:bg-gray-50">
+            <tr v-for="(item, index) in form.items" :key="index" class="hover:bg-orange-50">
               <td><input v-model="item.name" type="text" class="form-input" /></td>
               <td><input v-model="item.description" type="text" class="form-input" /></td>
               <td><input v-model.number="item.qty" type="number" class="form-input" /></td>
@@ -118,39 +187,44 @@
               <td><input v-model.number="item.subtotal" type="number" class="form-input" /></td>
               <td><input v-model.number="item.amount" type="number" class="form-input" /></td>
               <td class="text-center">
-                <button type="button" @click="removeItem(index)" class="text-red-500 hover:text-red-700 cursor-pointer">✖</button>
+                <button type="button"
+                  @click="removeItem(index)"
+                  class="text-red-500 hover:text-red-700 font-bold">
+                  ✖
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <button type="button" @click="addItem" class="mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white">+ Add Item</button>
     </div>
 
     <!-- Submit -->
-     <div class="w-[calc(100%+24px)] h-[1px] relative">
-      <div class="absolute w-[calc(100%+24px)] top-0 -left-6 h-[1px] bg-green-500"></div>
-     </div>
-    <div class="flex gap-4">
+    <div class="section-card flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
       <button
         type="submit"
         :disabled="isSubmitting"
-        class="px-6 py-2 bg-green-700 hover:bg-green-800 disabled:bg-green-400 cursor-pointer text-white font-medium shadow"
-      >
-        {{ isSubmitting ? 'Submitting...' : 'Submit Invoice' }}
+        class="px-7 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:bg-orange-300 text-white font-semibold shadow-md transition">
+        {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
       </button>
-      <div v-if="lastCreatedInvoiceId" class="flex items-center gap-2">
+
+      <div v-if="lastCreatedInvoiceId" class="flex items-center gap-3">
         <button
           type="button"
           @click="downloadPdf(lastCreatedInvoiceId)"
           :disabled="isDownloading"
-          class="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 cursor-pointer text-white font-medium shadow"
-        >
+          class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold shadow">
           {{ isDownloading ? 'Downloading...' : 'Download PDF' }}
         </button>
-        <span class="text-sm text-gray-600">Invoice ID: {{ lastCreatedInvoiceId }}</span>
+
+        <span class="text-sm text-gray-500">
+          Invoice ID: {{ lastCreatedInvoiceId }}
+        </span>
       </div>
+
     </div>
+
   </form>
 
   <Footer />
@@ -478,3 +552,29 @@ const submitForm = async () => {
   }
 };
 </script>
+
+<style scoped>
+@reference "tailwindcss";
+
+.form-label {
+  @apply block text-sm font-semibold text-gray-600 mb-1;
+}
+
+.form-input {
+  @apply w-full rounded-xl border border-gray-300 px-3 py-2 bg-gray-50
+         focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200
+         outline-none transition duration-150;
+}
+
+.table-th {
+  @apply px-3 py-3 text-left font-semibold text-gray-600;
+}
+
+.section-card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-200 p-5;
+}
+
+.section-title {
+  @apply text-lg font-bold text-gray-700 mb-4 flex items-center gap-2;
+}
+</style>
