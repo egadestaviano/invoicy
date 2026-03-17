@@ -3,9 +3,10 @@
     <div class="bg-gradient-to-r from-orange-500 via-orange-500 to-amber-400 shadow-[0_10px_30px_-18px_rgba(249,115,22,0.7)]">
       <div class="max-w-[1120px] mx-auto flex items-center justify-between px-6 py-4">
         <RouterLink to="/" class="group flex items-center space-x-3">
-          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-bold text-orange-500 transition duration-300 group-hover:scale-105 group-hover:rotate-3">
+          <!-- <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-bold text-orange-500 transition duration-300 group-hover:scale-105 group-hover:rotate-3">
             IV
-          </div>
+          </div> -->
+          <img src="/favicon.png" class="h-10 w-10" />
           <div>
             <span class="block text-xl font-semibold text-white">Invoicy</span>
             <span class="block text-xs uppercase tracking-[0.18em] text-orange-100">
