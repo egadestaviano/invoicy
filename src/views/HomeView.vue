@@ -1,580 +1,325 @@
 <template>
-  <Header />
+  <div class="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(251,191,36,0.22),_transparent_28%),linear-gradient(180deg,#fff8ef_0%,#ffffff_38%,#fffaf5_100%)] text-slate-900">
+    <Header />
 
-  <!-- Page Title -->
-  <div class="max-w-5xl mx-auto px-4 md:px-6 pt-6">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-      <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
-        Create Invoice
-      </h1>
-      <div class="text-sm text-gray-500">
-        Fill the details and generate a downloadable PDF invoice
-      </div>
-    </div>
+    <main class="overflow-x-hidden pt-20 md:pt-24">
+      <section class="px-4 md:px-6 pt-8 md:pt-12 pb-18">
+        <div class="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
+          <div class="space-y-8 animate-rise">
+            <div class="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/85 px-4 py-2 text-sm font-medium text-orange-700 shadow-sm backdrop-blur">
+              Built for fast, polished invoices
+            </div>
+
+            <div class="space-y-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
+                Meet Invoicy
+              </p>
+              <h1 class="max-w-3xl text-4xl md:text-6xl font-black tracking-tight text-slate-900">
+                Create client-ready invoices in minutes with Invoicy.
+              </h1>
+              <p class="max-w-2xl text-lg leading-8 text-slate-600">
+                Invoicy helps you draft invoices, add your logo and signature, and download a clean PDF from one focused workflow.
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <RouterLink
+                to="/generator"
+                class="inline-flex items-center justify-center rounded-2xl bg-orange-500 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-orange-200 transition duration-300 hover:-translate-y-1 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-300/50"
+              >
+                Open Invoicy
+              </RouterLink>
+              <a
+                href="#features"
+                class="inline-flex items-center justify-center rounded-2xl border border-slate-300 px-6 py-3.5 text-base font-semibold text-slate-700 transition duration-300 hover:-translate-y-1 hover:border-orange-300 hover:bg-white hover:text-orange-600"
+              >
+                Explore Features
+              </a>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div class="feature-chip hover-lift animate-rise-delay-1">
+                <p class="text-2xl font-black text-slate-900">3 steps</p>
+                <p class="mt-1 text-sm text-slate-600">Fill in details, generate the invoice, and download the PDF.</p>
+              </div>
+              <div class="feature-chip hover-lift animate-rise-delay-2">
+                <p class="text-2xl font-black text-slate-900">No detours</p>
+                <p class="mt-1 text-sm text-slate-600">Go straight into the billing flow when you are ready to work.</p>
+              </div>
+              <div class="feature-chip hover-lift animate-rise-delay-3">
+                <p class="text-2xl font-black text-slate-900">Brand ready</p>
+                <p class="mt-1 text-sm text-slate-600">Add payment details, your logo, and signature in one place.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative animate-float-in">
+            <div class="floating-orb absolute -top-8 -left-8 h-32 w-32 rounded-full bg-orange-200/60 blur-3xl"></div>
+            <div class="floating-orb-delay absolute -bottom-10 right-0 h-40 w-40 rounded-full bg-amber-100 blur-3xl"></div>
+            <div class="hover-lift relative overflow-hidden rounded-[2rem] border border-orange-100 bg-white/92 p-6 shadow-[0_30px_80px_-30px_rgba(249,115,22,0.35)] backdrop-blur">
+              <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-300 via-orange-500 to-amber-300"></div>
+
+              <div class="flex items-center justify-between border-b border-orange-100 pb-4">
+                <div>
+                  <p class="text-sm font-semibold text-orange-600">Product Preview</p>
+                  <h2 class="mt-1 text-2xl font-bold text-slate-900">Invoicy workflow</h2>
+                </div>
+                <div class="rounded-full bg-orange-50 px-3 py-1 text-sm font-medium text-orange-700">
+                  PDF ready
+                </div>
+              </div>
+
+              <div class="mt-6 space-y-4">
+                <div class="info-card hover-lift-subtle">
+                  <p class="text-sm font-semibold text-slate-900">Invoice details</p>
+                  <p class="mt-2 text-sm text-slate-600">Add invoice number, dates, customer information, notes, and line items.</p>
+                </div>
+                <div class="info-card hover-lift-subtle">
+                  <p class="text-sm font-semibold text-slate-900">Branding and payment</p>
+                  <p class="mt-2 text-sm text-slate-600">Upload your logo, include payment details, and capture a signature.</p>
+                </div>
+                <div class="info-card-highlight hover-lift-subtle">
+                  <p class="text-sm font-semibold text-orange-700">Ready to send</p>
+                  <p class="mt-2 text-sm text-slate-600">Generate the invoice, then download a polished PDF to share with clients.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="px-4 md:px-6 py-16">
+        <div class="max-w-6xl mx-auto">
+          <div class="max-w-2xl animate-rise">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">Why teams choose Invoicy</p>
+            <h2 class="mt-3 text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+              Everything you need to build a clean invoice without slowing down your workflow.
+            </h2>
+          </div>
+
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <article class="marketing-card hover-lift animate-rise-delay-1">
+              <p class="text-sm font-semibold text-orange-600">Fast to complete</p>
+              <h3 class="mt-3 text-xl font-bold text-slate-900">A focused form built around billing essentials</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                The core invoice fields are already organized, so you can move from draft to finished invoice with less friction.
+              </p>
+            </article>
+            <article class="marketing-card hover-lift animate-rise-delay-2">
+              <p class="text-sm font-semibold text-orange-600">Polished output</p>
+              <h3 class="mt-3 text-xl font-bold text-slate-900">Logo, signature, and line items in one smooth flow</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Bring brand identity and payment details into the same workspace instead of bouncing between multiple tools.
+              </p>
+            </article>
+            <article class="marketing-card hover-lift animate-rise-delay-3">
+              <p class="text-sm font-semibold text-orange-600">Ready to share</p>
+              <h3 class="mt-3 text-xl font-bold text-slate-900">Download a PDF right after the invoice is created</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Complete the invoice once, then export a PDF that is ready to send to your client right away.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white/70 px-4 md:px-6 py-16">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between animate-rise">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">How it works</p>
+              <h2 class="mt-3 text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+                Three simple steps from draft to downloadable invoice.
+              </h2>
+            </div>
+            <RouterLink
+              to="/generator"
+              class="text-sm font-semibold text-orange-600 transition hover:text-orange-700"
+            >
+              Open the generator
+            </RouterLink>
+          </div>
+
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <div class="process-card-dark hover-lift animate-rise-delay-1">
+              <p class="text-sm font-semibold text-orange-300">01</p>
+              <h3 class="mt-4 text-2xl font-bold">Add invoice details</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-300">
+                Fill in customer information, dates, notes, and the line items you want to bill.
+              </p>
+            </div>
+            <div class="process-card-warm hover-lift animate-rise-delay-2">
+              <p class="text-sm font-semibold text-orange-600">02</p>
+              <h3 class="mt-4 text-2xl font-bold text-slate-900">Apply your branding</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Upload a logo, add payment information, and save a signature for a more professional finish.
+              </p>
+            </div>
+            <div class="process-card-light hover-lift animate-rise-delay-3">
+              <p class="text-sm font-semibold text-orange-600">03</p>
+              <h3 class="mt-4 text-2xl font-bold text-slate-900">Generate and download</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                Submit the invoice, then download the finished PDF to deliver it to your client.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 md:px-6 py-16">
+        <div class="cta-panel animate-float-in max-w-5xl mx-auto rounded-[2rem] px-8 py-12 text-center text-white">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-300">Start now</p>
+          <h2 class="mt-4 text-3xl md:text-5xl font-black tracking-tight">
+            Start building polished invoices with Invoicy today.
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-base md:text-lg leading-8 text-slate-300">
+            Open the generator and finish your next invoice with a faster, cleaner billing flow.
+          </p>
+          <div class="mt-8 flex justify-center">
+            <RouterLink
+              to="/generator"
+              class="inline-flex items-center justify-center rounded-2xl bg-orange-500 px-6 py-3.5 text-base font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-300/50"
+            >
+              Launch Invoicy
+            </RouterLink>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
   </div>
-
-  <form @submit.prevent="submitForm" class="max-w-5xl mx-auto px-4 md:px-6 py-8 space-y-6">
-
-    <!-- Invoice Info -->
-    <div class="section-card">
-      <div class="section-title">📄 Invoice Information</div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label class="form-label">Invoice Number</label>
-          <input v-model="form.invoice_number" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Process Date</label>
-          <input v-model="form.process_date" type="date" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Due Date</label>
-          <input v-model="form.due_date" type="date" class="form-input" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Customer Info -->
-    <div class="section-card">
-      <div class="section-title">👤 Customer Details</div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="form-label">Customer Name</label>
-          <input v-model="form.customer_name" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Customer ID</label>
-          <input v-model="form.customer_id" type="text" class="form-input" />
-        </div>
-        <div class="md:col-span-2">
-          <label class="form-label">Customer Address</label>
-          <textarea v-model="form.customer_address" class="form-input"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact Info -->
-    <div class="section-card">
-      <div class="section-title">☎ Contact & Payment</div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label class="form-label">Previous Balance</label>
-          <input v-model.number="form.previous_balance" type="number" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Contact Person</label>
-          <input v-model="form.contact_person" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Contact Phone</label>
-          <input v-model="form.contact_phone" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Payment Account</label>
-          <input v-model="form.payment_account" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Contact Email</label>
-          <input v-model="form.contact_email" type="email" class="form-input" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Notes -->
-    <div class="section-card">
-      <div class="section-title">📝 Notes</div>
-      <textarea v-model="form.notes" class="form-input"></textarea>
-    </div>
-
-    <!-- Signature & Logo -->
-    <div class="section-card">
-      <div class="section-title">🖊 Branding & Signature</div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Signature -->
-        <div>
-          <label class="form-label">Signature</label>
-
-          <canvas
-            ref="signatureCanvas"
-            class="w-full h-40 bg-white rounded-xl border-2 border-dashed border-gray-300 cursor-crosshair touch-none shadow-inner">
-          </canvas>
-
-          <div class="mt-3 flex gap-2">
-            <button type="button"
-              @click="clearSignature"
-              class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700">
-              Clear
-            </button>
-
-            <button type="button"
-              @click="saveSignature"
-              class="px-4 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-medium shadow-sm">
-              Save Signature
-            </button>
-          </div>
-
-          <div v-if="form.signature_image_path" class="mt-3">
-            <p class="text-sm text-gray-600 mb-1">Preview:</p>
-            <img :src="form.signature_image_path" class="h-20 object-contain border rounded-md" />
-          </div>
-        </div>
-
-        <!-- Logo -->
-        <div>
-          <label class="form-label">Logo</label>
-
-          <input
-            ref="logoFileInput"
-            type="file"
-            @change="handleLogoUpload"
-            accept=".jpg,.jpeg,.png,.gif"
-            class="form-input" />
-
-          <div v-if="form.logo_preview" class="mt-3">
-            <p class="text-sm text-gray-600 mb-1">Preview:</p>
-            <img :src="form.logo_preview" class="h-20 object-contain border rounded-md" />
-
-            <button
-              type="button"
-              @click="clearLogo"
-              class="mt-2 px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md">
-              Remove Logo
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Items -->
-    <div class="section-card">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-lg font-bold text-gray-700">Items</h3>
-
-        <button
-          type="button"
-          @click="addItem"
-          class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-medium shadow-sm">
-          + Add Item
-        </button>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="min-w-full border border-gray-200 text-sm rounded-xl overflow-hidden">
-          <thead class="bg-orange-50 text-orange-800">
-            <tr>
-              <th class="table-th">Name</th>
-              <th class="table-th">Description</th>
-              <th class="table-th">Qty</th>
-              <th class="table-th">Price</th>
-              <th class="table-th">Subtotal</th>
-              <th class="table-th">Amount</th>
-              <th class="table-th w-12"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="(item, index) in form.items" :key="index" class="hover:bg-orange-50">
-              <td><input v-model="item.name" type="text" class="form-input" /></td>
-              <td><input v-model="item.description" type="text" class="form-input" /></td>
-              <td><input v-model.number="item.qty" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.price" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.subtotal" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.amount" type="number" class="form-input" /></td>
-              <td class="text-center">
-                <button type="button"
-                  @click="removeItem(index)"
-                  class="text-red-500 hover:text-red-700 font-bold">
-                  ✖
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Submit -->
-    <div class="section-card flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-
-      <button
-        type="submit"
-        :disabled="isSubmitting"
-        class="px-7 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:bg-orange-300 text-white font-semibold shadow-md transition">
-        {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
-      </button>
-
-      <div v-if="lastCreatedInvoiceId" class="flex items-center gap-3">
-        <button
-          type="button"
-          @click="downloadPdf(lastCreatedInvoiceId)"
-          :disabled="isDownloading"
-          class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold shadow">
-          {{ isDownloading ? 'Downloading...' : 'Download PDF' }}
-        </button>
-
-        <span class="text-sm text-gray-500">
-          Invoice ID: {{ lastCreatedInvoiceId }}
-        </span>
-      </div>
-
-    </div>
-
-  </form>
-
-  <Footer />
 </template>
 
 <script setup>
-import { reactive, toRaw, onMounted, onUnmounted, ref } from "vue";
-import Header from "../components/Header.vue";
-import Footer from "../components/Footer.vue";
-import invoiceService from "../services/invoiceService.js";
-import SignaturePad from "signature_pad";
-import { generateInvoicePdf } from "../utils/pdf/generateInvoicePdf"; 
-
-const signatureCanvas = ref(null);
-const logoFileInput = ref(null);
-const lastCreatedInvoiceId = ref(null);
-const isDownloading = ref(false);
-const isSubmitting = ref(false);
-let signaturePad = null;
-let handleResize = null;
-
-onMounted(() => {
-  if (signatureCanvas.value) {
-    const canvas = signatureCanvas.value;
-    const rect = canvas.getBoundingClientRect();
-
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-
-    signaturePad = new SignaturePad(canvas);
-    signaturePad.addEventListener('endStroke', () => {
-      if (!signaturePad.isEmpty()) {
-        form.signature_image_path = signaturePad.toDataURL();
-      }
-    });
-  }
-});
-
-onUnmounted(() => {
-  if (handleResize) {
-    window.removeEventListener('resize', handleResize);
-  }
-});
-
-const clearSignature = () => {
-  if (signaturePad && typeof signaturePad.clear === 'function') {
-    signaturePad.clear();
-    form.signature_image_path = '';
-  }
-};
-
-const saveSignature = () => {
-  if (signaturePad && typeof signaturePad.isEmpty === 'function' && !signaturePad.isEmpty()) {
-    form.signature_image_path = signaturePad.toDataURL();
-    console.log('Signature saved:', form.signature_image_path.substring(0, 50) + '...');
-    alert('Signature saved successfully!');
-  } else {
-    alert('Please draw a signature first!');
-  }
-};
-
-const handleLogoUpload = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-    const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
-
-    if (!allowedTypes.includes(file.type) || !allowedExtensions.includes(fileExtension)) {
-      alert('Please select a valid image file (JPEG, PNG, or GIF). WebP files are not supported.');
-      e.target.value = '';
-      return;
-    }
-
-    form.logo_image_file = file;
-    form.logo_preview = URL.createObjectURL(file);
-  }
-};
-
-const clearLogo = () => {
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview);
-  }
-  form.logo_image_file = null;
-  form.logo_preview = '';
-  if (logoFileInput.value) {
-    logoFileInput.value.value = '';
-  }
-};
-
-const form = reactive({
-  invoice_number: '',
-  process_date: '',
-  due_date: '',
-  customer_name: '',
-  customer_id: '',
-  customer_address: '',
-  previous_balance: 0,
-  contact_person: '',
-  contact_phone: '',
-  payment_account: '',
-  contact_email: '',
-  notes: '',
-  signature_image_path: '',
-  logo_image_path: '',
-  logo_image_file: null,
-  logo_preview: '',
-  items: [
-    {
-      name: '',
-      description: '',
-      qty: 1,
-      price: 0,
-      subtotal: 0,
-      amount: 0,
-    },
-  ],
-})
-
-const resetForm = () => {
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview);
-  }
-
-  Object.assign(form, {
-    invoice_number: '',
-    process_date: '',
-    due_date: '',
-    customer_name: '',
-    customer_id: '',
-    customer_address: '',
-    previous_balance: 0,
-    contact_person: '',
-    contact_phone: '',
-    payment_account: '',
-    contact_email: '',
-    notes: '',
-    signature_image_path: '',
-    logo_image_path: '',
-    logo_image_file: null,
-    logo_preview: '',
-    items: [
-      {
-        name: '',
-        description: '',
-        qty: 1,
-        price: 0,
-        subtotal: 0,
-        amount: 0,
-      },
-    ],
-  })
-
-  if (signaturePad && typeof signaturePad.clear === 'function') {
-    signaturePad.clear();
-  }
-
-  if (logoFileInput.value) {
-    logoFileInput.value.value = '';
-  }
-}
-
-const addItem = () => {
-  form.items.push({
-    name: "",
-    description: "",
-    qty: 1,
-    price: 0,
-    subtotal: 0,
-    amount: 0,
-  });
-};
-
-const removeItem = (index) => {
-  form.items.splice(index, 1);
-};
-
-const downloadPdf = async (invoiceId) => {
-  try {
-    isDownloading.value = true;
-
-    const response = await invoiceService.downloadPdf(invoiceId);
-
-    const invoice = response.data?.data?.invoice;
-
-    if (!invoice) {
-      alert("Invoice data not found from server");
-      return;
-    }
-
-    invoice.items = Array.isArray(invoice.items) ? invoice.items : [];
-
-    generateInvoicePdf(invoice);
-  } catch (error) {
-    console.error("Error downloading PDF:", error);
-    alert("Failed to download invoice. Please try again later.");
-  } finally {
-    isDownloading.value = false;
-  }
-};
-
-
-const submitForm = async () => {
-  if (!form.invoice_number.trim()) {
-    alert('Invoice Number is required!');
-    return;
-  }
-
-  if (!form.customer_name.trim()) {
-    alert('Customer Name is required!');
-    return;
-  }
-
-  if (!form.process_date) {
-    alert('Process Date is required!');
-    return;
-  }
-
-  if (!form.due_date) {
-    alert('Due Date is required!');
-    return;
-  }
-
-  if (form.process_date && form.due_date) {
-    const processDate = new Date(form.process_date);
-    const dueDate = new Date(form.due_date);
-    if (dueDate < processDate) {
-      alert('Due Date must be the same as or after the Process Date!');
-      return;
-    }
-  }
-
-  if (form.contact_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contact_email)) {
-    alert('Please enter a valid email address!');
-    return;
-  }
-
-  const validItems = form.items.filter(item =>
-    item.name.trim() && item.qty > 0 && item.price > 0
-  );
-
-  if (validItems.length === 0) {
-    alert('At least one item with name, quantity, and price is required!');
-    return;
-  }
-
-  if (!form.signature_image_path) {
-    if (signaturePad && typeof signaturePad.isEmpty === 'function' && !signaturePad.isEmpty()) {
-      form.signature_image_path = signaturePad.toDataURL();
-    } else {
-      const confirmSignature = confirm(
-        'No signature detected. Do you want to continue without signature?'
-      );
-      if (!confirmSignature) {
-        return;
-      }
-    }
-  }
-
-  try {
-    isSubmitting.value = true;
-    const formData = new FormData();
-
-    formData.append('invoice_number', form.invoice_number);
-    formData.append('process_date', form.process_date);
-    formData.append('due_date', form.due_date);
-    formData.append('customer_name', form.customer_name);
-    formData.append('customer_id', form.customer_id);
-    formData.append('customer_address', form.customer_address);
-    formData.append('previous_balance', form.previous_balance);
-    formData.append('contact_person', form.contact_person);
-    formData.append('contact_phone', form.contact_phone);
-    formData.append('payment_account', form.payment_account);
-    formData.append('contact_email', form.contact_email);
-    formData.append('notes', form.notes);
-
-    if (form.signature_image_path) {
-      formData.append('signature', form.signature_image_path);
-    }
-
-    if (form.logo_image_file) {
-      formData.append('logo', form.logo_image_file);
-    }
-
-    validItems.forEach((item, index) => {
-      formData.append(`items[${index}][name]`, item.name);
-      formData.append(`items[${index}][description]`, item.description);
-      formData.append(`items[${index}][qty]`, item.qty);
-      formData.append(`items[${index}][price]`, item.price);
-      formData.append(`items[${index}][subtotal]`, item.subtotal);
-      formData.append(`items[${index}][amount]`, item.amount);
-    });
-
-    const res = await invoiceService.create(formData);
-    alert("Invoice Successfully Created!");  
-
-    if (res.data.data.id) {
-      lastCreatedInvoiceId.value = res.data?.id;
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      await downloadPdf(res.data?.data.id);
-    }
-
-    resetForm();
-  } catch (error) {
-    if (error.response) {
-      // kalau Laravel validation error
-      if (error.response.status === 422) {
-        const errors = error.response.data.errors;
-        if (errors) {
-          const messages = Object.values(errors).flat().join("\n");
-          alert(`Validation Error:\n${messages}`);
-        } else {
-          alert("Validation failed, but no details provided.");
-        }
-      } else {
-        console.error("API Error:", error.response);
-        alert(`Error ${error.response.status}: ${error.response.statusText}`);
-      }
-    } else {
-      console.error("Unexpected Error:", error);
-      alert("Something went wrong, please try again.");
-    }
-  } finally {
-    isSubmitting.value = false;
-  }
-};
+import { RouterLink } from 'vue-router'
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
 </script>
 
 <style scoped>
 @reference "tailwindcss";
 
-.form-label {
-  @apply block text-sm font-semibold text-gray-600 mb-1;
+.feature-chip {
+  @apply rounded-2xl border border-orange-100 bg-white p-4 shadow-sm transition duration-300;
 }
 
-.form-input {
-  @apply w-full rounded-xl border border-gray-300 px-3 py-2 bg-gray-50
-         focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200
-         outline-none transition duration-150;
+.marketing-card {
+  @apply rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
 }
 
-.table-th {
-  @apply px-3 py-3 text-left font-semibold text-gray-600;
+.info-card {
+  @apply rounded-2xl bg-slate-50 p-4 transition duration-300;
 }
 
-.section-card {
-  @apply bg-white rounded-2xl shadow-sm border border-gray-200 p-5;
+.info-card-highlight {
+  @apply rounded-2xl bg-orange-50 p-4 ring-1 ring-orange-100 transition duration-300;
 }
 
-.section-title {
-  @apply text-lg font-bold text-gray-700 mb-4 flex items-center gap-2;
+.process-card-dark {
+  @apply rounded-3xl bg-slate-900 p-6 text-white shadow-xl shadow-slate-200 transition duration-300;
+}
+
+.process-card-warm {
+  @apply rounded-3xl border border-orange-100 bg-orange-50 p-6 shadow-sm transition duration-300;
+}
+
+.process-card-light {
+  @apply rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
+}
+
+.cta-panel {
+  background:
+    radial-gradient(circle at top, rgba(251, 146, 60, 0.25), transparent 35%),
+    linear-gradient(135deg, #0f172a 0%, #111827 55%, #1e293b 100%);
+  box-shadow: 0 30px 80px -30px rgba(15, 23, 42, 0.6);
+}
+
+.hover-lift {
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.28);
+  border-color: rgba(251, 146, 60, 0.38);
+}
+
+.hover-lift-subtle {
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hover-lift-subtle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 32px -24px rgba(15, 23, 42, 0.24);
+}
+
+.animate-rise {
+  animation: rise-in 700ms ease-out both;
+}
+
+.animate-rise-delay-1 {
+  animation: rise-in 750ms ease-out 80ms both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise-in 750ms ease-out 160ms both;
+}
+
+.animate-rise-delay-3 {
+  animation: rise-in 750ms ease-out 240ms both;
+}
+
+.animate-float-in {
+  animation: float-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.floating-orb {
+  animation: drift 7s ease-in-out infinite;
+}
+
+.floating-orb-delay {
+  animation: drift 9s ease-in-out infinite reverse;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(10px, -12px, 0);
+  }
 }
 </style>

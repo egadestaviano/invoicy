@@ -1,8 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
-// See here how to get started:
-// https://playwright.dev/docs/intro
-test('visits the app root url', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('h1')).toHaveText('You did it!');
+test('visits the landing page', async ({ page }) => {
+  await page.goto('/')
+
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(
+    'Create client-ready invoices in minutes with Invoicy.',
+  )
+  await expect(page.getByRole('link', { name: 'Open Invoicy' })).toBeVisible()
+})
+
+test('navigates to generator from landing page', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('link', { name: 'Open Invoicy' }).click()
+
+  await expect(page).toHaveURL(/\/generator$/)
+  await expect(page.getByRole('heading', { name: 'Create Invoice' })).toBeVisible()
 })

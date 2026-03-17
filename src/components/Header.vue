@@ -1,34 +1,41 @@
 <template>
-<header class="w-full border-b border-orange-500">
-  <!-- Bagian atas: logo + menu utama -->
-  <div class="bg-orange-500">
-    <div class="max-w-[1024px] mx-auto flex items-center justify-between px-6 md:px-0 py-3">
-      <!-- Logo -->
-      <div class="flex items-center space-x-3">
-        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-orange-500 font-bold text-lg">
-          IG
-        </div>
-        <span class="text-xl font-semibold text-white">
-          Invoicy
-        </span>
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-orange-500/20 bg-white/75 backdrop-blur-xl">
+    <div class="bg-gradient-to-r from-orange-500 via-orange-500 to-amber-400 shadow-[0_10px_30px_-18px_rgba(249,115,22,0.7)]">
+      <div class="max-w-[1120px] mx-auto flex items-center justify-between px-6 py-4">
+        <RouterLink to="/" class="group flex items-center space-x-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-bold text-orange-500 transition duration-300 group-hover:scale-105 group-hover:rotate-3">
+            IV
+          </div>
+          <div>
+            <span class="block text-xl font-semibold text-white">Invoicy</span>
+            <span class="block text-xs uppercase tracking-[0.18em] text-orange-100">
+              Smart Invoice Flow
+            </span>
+          </div>
+        </RouterLink>
+
+        <nav class="flex items-center gap-3 text-sm font-medium text-white md:gap-6 md:text-base">
+          <RouterLink to="/" class="rounded-full px-3 py-1.5 transition hover:bg-white/12 hover:text-orange-50">
+            Home
+          </RouterLink>
+          <RouterLink
+            to="/generator"
+            class="rounded-full px-3 py-1.5 transition hover:bg-white/12 hover:text-orange-50"
+          >
+            Generator
+          </RouterLink>
+          <a
+            href="mailto:support@invoicy.app"
+            class="rounded-full px-3 py-1.5 transition hover:bg-white/12 hover:text-orange-50"
+          >
+            Support
+          </a>
+        </nav>
       </div>
-
-      <!-- Menu kanan -->
-      <nav class="flex space-x-6 text-white font-medium">
-        <a href="#" class="hover:text-orange-700 transition">Home</a>
-        <!-- <a href="#" class="hover:text-orange-700 transition">About</a> -->
-        <a href="#" class="hover:text-orange-700 transition">Support</a>
-      </nav>
     </div>
-  </div>
-
-  <!-- Navigasi kedua: full hijau -->
-  <!-- <div class="bg-orange-500">
-    <div class="max-w-[1024px] mx-auto flex space-x-6 px-6 md:px-0 py-2 text-white font-medium">
-      <a href="#" class="hover:text-orange-100 transition">Create Invoice</a>
-      <a href="#" class="hover:text-orange-100 transition">Templates</a>
-      <a href="#" class="hover:text-orange-100 transition">History</a>
-    </div>
-  </div> -->
-</header>
+  </header>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>

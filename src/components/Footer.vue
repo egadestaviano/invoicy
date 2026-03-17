@@ -1,50 +1,30 @@
 <template>
-<footer class="w-full border-t border-orange-500">
-  <!-- Bagian atas: info footer -->
-  <!-- <div class="bg-white">
-    <div class="max-w-[1024px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-0 py-8">
-      <div>
-        <div class="flex items-center space-x-3 mb-4">
-          <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-            IG
-          </div>
-          <span class="text-xl font-semibold text-orange-600">
-            Invoicy
-          </span>
+  <footer class="w-full border-t border-orange-500/15">
+    <div class="bg-white">
+      <div class="max-w-[1120px] mx-auto flex flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-lg font-semibold text-slate-900">Invoicy</p>
+          <p class="mt-2 max-w-xl text-sm leading-7 text-slate-600">
+            A cleaner way to create polished invoices, organize billing details, and export ready-to-send PDFs.
+          </p>
         </div>
-        <p class="text-sm text-gray-600">
-          Generate invoices instantly without login. Fast, secure, and free.
-        </p>
-      </div> -->
 
-      <!-- Quick Links -->
-      <!-- <div>
-        <h3 class="text-orange-600 font-semibold mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
-          <li><a href="#" class="hover:text-orange-700">Home</a></li>
-          <li><a href="#" class="hover:text-orange-700">Features</a></li>
-          <li><a href="#" class="hover:text-orange-700">Pricing</a></li>
-          <li><a href="#" class="hover:text-orange-700">Contact</a></li>
-        </ul>
-      </div> -->
-
-      <!-- Contact -->
-      <!-- <div>
-        <h3 class="text-orange-600 font-semibold mb-3">Contact</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
-          <li>Email: support@invoicegen.com</li>
-          <li>Phone: +62 812-3456-7890</li>
-          <li>Location: Jakarta, Indonesia</li>
-        </ul>
+        <div class="flex flex-wrap items-center gap-4 text-sm font-medium text-slate-600">
+          <RouterLink to="/" class="transition hover:text-orange-600">Home</RouterLink>
+          <RouterLink to="/generator" class="transition hover:text-orange-600">Generator</RouterLink>
+          <a href="mailto:support@invoicy.app" class="transition hover:text-orange-600">support@invoicy.app</a>
+        </div>
       </div>
     </div>
-  </div> -->
 
-  <!-- Bagian bawah: copyright -->
-  <div class="bg-orange-500">
-    <div class="max-w-[1024px] mx-auto text-center text-white text-sm py-3 px-6 md:px-0">
-      © 2025 Invoicy. All rights reserved.
+    <div class="bg-slate-950">
+      <div class="max-w-[1120px] mx-auto text-center text-white/85 text-sm py-3 px-6">
+        (c) 2026 Invoicy. All rights reserved.
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>
