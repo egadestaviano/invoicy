@@ -167,7 +167,7 @@
       </section>
 
       <section class="px-4 md:px-6 py-16">
-        <div class="cta-panel animate-float-in max-w-5xl mx-auto rounded-[2rem] px-8 py-12 text-center text-white">
+        <div class="cta-panel animate-float-in max-w-6xl mx-auto rounded-[2rem] px-8 py-12 text-center text-white">
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-300">Start now</p>
           <h2 class="mt-4 text-3xl md:text-5xl font-black tracking-tight">
             Start building polished invoices with Invoicy today.
@@ -201,11 +201,11 @@ import Footer from '../components/Footer.vue'
 @reference "tailwindcss";
 
 .feature-chip {
-  @apply rounded-2xl border border-orange-100 bg-white p-4 shadow-sm transition duration-300;
+  @apply rounded-xl border border-orange-100 bg-white p-4 shadow-sm transition duration-300;
 }
 
 .marketing-card {
-  @apply rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
+  @apply rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
 }
 
 .info-card {
@@ -217,15 +217,15 @@ import Footer from '../components/Footer.vue'
 }
 
 .process-card-dark {
-  @apply rounded-3xl bg-slate-900 p-6 text-white shadow-xl shadow-slate-200 transition duration-300;
+  @apply rounded-2xl bg-slate-900 p-6 text-white shadow-xl shadow-slate-200 transition duration-300;
 }
 
 .process-card-warm {
-  @apply rounded-3xl border border-orange-100 bg-orange-50 p-6 shadow-sm transition duration-300;
+  @apply rounded-2xl border border-orange-100 bg-orange-50 p-6 shadow-sm transition duration-300;
 }
 
 .process-card-light {
-  @apply rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
+  @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300;
 }
 
 .cta-panel {

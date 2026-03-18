@@ -2,7 +2,7 @@
   <div class="pt-20 md:pt-24">
     <Header />
 
-    <div class="max-w-5xl mx-auto px-4 md:px-6 pt-6">
+    <div class="max-w-6xl mx-auto px-4 md:px-0 pt-6">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
           Create Invoice
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <form @submit.prevent="submitForm" class="max-w-5xl mx-auto px-4 md:px-6 py-8 space-y-6">
+    <form @submit.prevent="submitForm" class="max-w-6xl mx-auto px-4 md:px-0 py-8 space-y-6">
       <div class="section-card">
         <div class="section-title">Invoice Information</div>
 
@@ -176,13 +176,13 @@
           </thead>
 
           <tbody>
-            <tr v-for="(item, index) in form.items" :key="index" class="hover:bg-orange-50">
-              <td><input v-model="item.name" type="text" class="form-input" /></td>
-              <td><input v-model="item.description" type="text" class="form-input" /></td>
-              <td><input v-model.number="item.qty" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.price" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.subtotal" type="number" class="form-input" /></td>
-              <td><input v-model.number="item.amount" type="number" class="form-input" /></td>
+            <tr v-for="(item, index) in form.items" :key="index" class="hover:bg-orange-50 gap-2">
+              <td class="p-2"><input v-model="item.name" type="text" class="form-input" /></td>
+              <td class="p-2"><input v-model="item.description" type="text" class="form-input" /></td>
+              <td class="p-2"><input v-model.number="item.qty" type="number" class="form-input" /></td>
+              <td class="p-2"><input v-model.number="item.price" type="number" class="form-input" /></td>
+              <td class="p-2"><input v-model.number="item.subtotal" type="number" class="form-input" /></td>
+              <td class="p-2"><input v-model.number="item.amount" type="number" class="form-input" /></td>
               <td class="text-center">
                 <button
                   type="button"
@@ -551,7 +551,7 @@ const submitForm = async () => {
 }
 
 .form-input {
-  @apply w-full rounded-xl border border-gray-300 px-3 py-2 bg-gray-50
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 bg-gray-50
     focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200
     outline-none transition duration-150;
 }
@@ -561,7 +561,7 @@ const submitForm = async () => {
 }
 
 .section-card {
-  @apply bg-white rounded-2xl shadow-sm border border-gray-200 p-5;
+  @apply bg-white rounded-xl shadow-sm border border-gray-200 p-5;
 }
 
 .section-title {
