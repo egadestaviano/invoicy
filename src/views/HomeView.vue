@@ -322,4 +322,20 @@ import Footer from '../components/Footer.vue'
     transform: translate3d(10px, -12px, 0);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-rise-delay-1,
+  .animate-rise-delay-2,
+  .animate-rise-delay-3,
+  .animate-float-in,
+  .floating-orb,
+  .floating-orb-delay,
+  .hover-lift,
+  .hover-lift-subtle {
+    animation: none !important;
+    transform: none !important;
+    transition-duration: 0ms !important;
+  }
+}
 </style>
