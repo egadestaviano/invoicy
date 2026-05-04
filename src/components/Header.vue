@@ -1,24 +1,22 @@
 <template>
-  <header class="fixed inset-x-0 top-0 z-50 border-b border-[#F99237]/20 bg-white/75 backdrop-blur-xl">
-    <div class="bg-[#F99237]">
-      <div class="max-w-6xl mx-auto flex items-center justify-between md:px-6">
-        <RouterLink to="/" class="group flex items-center">
-          <img src="/icon.svg" alt="Logo Invoicy" class="h-20 w-20" />
-          <div>
-            <span class="block text-xl font-semibold text-white">Invoicy</span>
-            <span class="block text-xs uppercase tracking-[0.18em] text-orange-100">
-              Smart Invoice Flow
-            </span>
-          </div>
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-zinc-200">
+    <div class="bg-gradient-to-r bg-orange-500/80 backdrop-blur-lg">
+      <div class="max-w-6xl mx-auto py-3 flex items-center justify-between">
+        <RouterLink to="/" class="flex items-center -ml-4">
+          <img src="/icon.svg" alt="Logo Invoicy" class="h-12 w-12" />
+          <span class="text-xl font-bold text-white tracking-tight">Invoicy</span>
         </RouterLink>
 
-        <nav class="flex items-center gap-3 text-sm font-medium text-white md:gap-6 md:text-base">
-          <RouterLink to="/" class=" px-3 py-1.5 transition hover:bg-white/12 hover:text-orange-50">
+        <nav class="flex gap-1 text-sm font-medium">
+          <RouterLink 
+            to="/" 
+            class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
+          >
             Home
           </RouterLink>
-          <RouterLink
-            to="/generator"
-            class="px-3 py-1.5 transition hover:bg-white/12 hover:text-orange-50"
+          <RouterLink 
+            to="/generator" 
+            class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
           >
             Generator
           </RouterLink>
