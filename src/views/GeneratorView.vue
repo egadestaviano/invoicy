@@ -1,15 +1,15 @@
 <template>
-  <div class="bg-slate-50 text-slate-900">
+  <div class="bg-slate-50 text-[#031846]">
     <Header />
 
     <main id="main-content" class="mx-auto max-w-6xl px-4 pb-16 pt-24 md:px-6 md:pt-28">
       <section class="pt-6">
         <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#E6712B]">
               Invoice workspace
             </p>
-            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Create Invoice</h1>
+            <h1 class="text-3xl  tracking-tight text-[#031846]">Create Invoice</h1>
           </div>
           <p class="max-w-xl text-sm text-slate-600">
             Fill in invoice details, add line items, then generate a downloadable PDF invoice.
@@ -262,7 +262,7 @@
                 <button
                   type="button"
                   @click="saveSignature"
-                  class="rounded-lg bg-orange-500 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-orange-600"
+                  class="rounded-lg cursor-pointer bg-[#F99237] px-4 py-2 font-medium text-white shadow-sm transition hover:bg-[#E6712B]"
                 >
                   Save Signature
                 </button>
@@ -322,7 +322,7 @@
             <button
               type="button"
               @click="addItem"
-              class="rounded-xl bg-orange-500 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-orange-600"
+              class="rounded-lg cursor-pointer bg-[#F99237] px-4 py-2 font-medium text-white shadow-sm transition hover:bg-[#E6712B]"
             >
               Add Item
             </button>
@@ -335,7 +335,7 @@
 
           <div class="mt-4 overflow-x-auto">
             <table class="min-w-full overflow-hidden rounded-xl border border-gray-200 text-sm">
-              <thead class="bg-orange-50 text-orange-800">
+              <thead class="bg-orange-50 text-[#F99237]">
                 <tr>
                   <th scope="col" class="table-th">Name</th>
                   <th scope="col" class="table-th">Description</th>
@@ -433,7 +433,7 @@
                     <button
                       type="button"
                       :aria-label="`Remove item ${index + 1}`"
-                      class="rounded-md px-2 py-1 font-bold text-red-500 transition hover:bg-red-50 hover:text-red-700"
+                      class="rounded-md px-2 py-1  text-red-500 transition hover:bg-red-50 hover:text-red-700"
                       @click="removeItem(index)"
                     >
                       Remove
@@ -450,7 +450,7 @@
             <button
               type="submit"
               :disabled="isSubmitting"
-              class="rounded-xl bg-orange-600 px-7 py-3 font-semibold text-white shadow-md transition hover:bg-orange-700 disabled:bg-orange-300"
+              class="rounded-lg bg-[#f7752a] px-7 py-3 font-semibold text-white cursor-pointer transition hover:bg-[#E6712B] disabled:bg-[#F99237]"
             >
               {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
             </button>
@@ -929,7 +929,7 @@ const submitForm = async () => {
 
 .form-input {
   @apply w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 transition duration-150
-    focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-200;
+    focus:border-[#F99237] focus:bg-white focus:ring-2 focus:ring-orange-200;
 }
 
 .form-input[aria-invalid='true'] {
@@ -945,6 +945,6 @@ const submitForm = async () => {
 }
 
 .section-title {
-  @apply mb-4 flex items-center gap-2 text-lg font-bold text-gray-800;
+  @apply mb-4 flex items-center gap-2 text-lg  text-gray-800;
 }
 </style>
