@@ -4,21 +4,21 @@
 
     <main class="overflow-x-hidden pt-20 md:pt-24">
       <section class="px-4 md:px-6 pt-6 md:pt-6 pb-16">
-        <div class="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-          <div class="space-y-8 animate-rise">
-            <div class="space-y-5">
-              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#c05a1a]">
+        <div class="max-w-6xl mx-auto">
+          <div class="space-y-8 animate-rise justify-center text-center mx-auto">
+            <div class="space-y-4">
+              <p class="text-sm font-semibold uppercase tracking-[0.1em] text-[#c05a1a]">
                 Meet Invoicy
               </p>
-              <h1 class="max-w-3xl text-4xl md:text-6xl font-[#031846] tracking-tight leading-none text-[#031846]">
+              <h1 class="max-w-4xl mx-auto text-4xl md:text-6xl font-bold font-[#031846] tracking-tight leading-none text-[#031846]">
                 Create invoices in minutes with Invoicy.
               </h1>
-              <p class="max-w-2xl text-lg leading-tight text-slate-600">
+              <p class="max-w-5xl text-lg leading-tight text-slate-600 mx-auto">
                 Invoicy helps you draft invoices, add your logo and signature, and download a clean PDF from one focused workflow.
               </p>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <RouterLink
                 to="/generator"
                 class="inline-flex items-center justify-center rounded-lg border-2 border-[#F99237] bg-white px-6 py-3.5 text-base font-semibold text-[#F99237] transition duration-200 hover:bg-[#F99237] hover:text-white"
@@ -33,25 +33,28 @@
               </a>
             </div>
 
-            <div class="grid gap-6 sm:grid-cols-3">
+            <div class="grid gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
               <div class="feature-chip p-5 animate-rise-delay-1">
-                <p class="text-xl font-semibold text-[#031846]">3 steps</p>
+                <p class="text-3xl font-bold text-[#031846]">3 steps</p>
                 <p class="mt-1 text-sm text-slate-600 leading-tight">Fill in details, generate, and download the PDF.</p>
               </div>
               <div class="feature-chip p-5 animate-rise-delay-2">
-                <p class="text-xl font-semibold text-[#031846]">No detours</p>
+                <p class="text-3xl font-bold text-[#031846]">No detours</p>
                 <p class="mt-1 text-sm text-slate-600 leading-tight">Start billing when ready.</p>
               </div>
               <div class="feature-chip p-5 animate-rise-delay-3">
-                <p class="text-xl font-semibold text-[#031846]">Brand ready</p>
+                <p class="text-3xl font-bold text-[#031846]">Brand ready</p>
                 <p class="mt-1 text-sm text-slate-600 leading-tight">Add payment details, logo, and signature .</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <!-- Product Preview Card – flat, no shadow, no float animation -->
-          <div class="relative select-none animate-rise-delay-2">
-            <!-- Floating orbs removed (commented out) -->
+      <!-- Product Preview Section -->
+      <section class="px-4 md:px-6 py-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="relative select-none animate-rise">
             <div class="relative overflow-hidden border border-orange-100 bg-white p-6">
               <div class="flex items-center justify-between border-b border-orange-100 pb-4">
                 <div>
@@ -87,11 +90,11 @@
           <div class="max-w-2xl animate-rise">
             <p class="text-sm font-semibold uppercase tracking-[0.1em] text-[#c05a1a]">Why teams choose Invoicy</p>
             <h2 class="mt-2 text-3xl max-w-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
-              Everything you need to build a clean invoice without slowing down your workflow.
+              Everything for clean, fast invoices.
             </h2>
           </div>
 
-          <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <div class="mt-8 grid gap-4 md:grid-cols-3">
             <article class="marketing-card hover-lift animate-rise-delay-1">
               <p class="text-sm font-semibold leading-0 text-[#c05a1a]">Fast to complete</p>
               <h3 class="mt-4 text-xl leading-tight text-[#031846]">A focused form built around billing essentials</h3>
@@ -123,15 +126,9 @@
             <div>
               <p class="text-sm font-semibold uppercase tracking-[0.1em] text-[#c05a1a]">How it works</p>
               <h2 class="mt-2 text-3xl max-w-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
-                Three simple steps from draft to downloadable invoice.
+                Create invoices in 3 simple steps.
               </h2>
             </div>
-            <!-- <RouterLink
-              to="/generator"
-              class="text-sm font-semibold text-[#c05a1a] transition hover:text-[#F99237]"
-            >
-              Open the generator
-            </RouterLink> -->
           </div>
 
           <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -160,9 +157,8 @@
         </div>
       </section>
 
-      <!-- CTA Section – flat, no shadow, lighter background -->
       <section class="px-4 md:px-6 py-16">
-        <div class="max-w-6xl mx-auto bg-orange-50 px-8 py-12 text-center text-[#031846]">
+        <div class="max-w-6xl mx-auto bg-orange-50 px-6 py-8 text-center text-[#031846]">
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#c05a1a]">Start now</p>
           <h2 class="mt-4 text-3xl md:text-5xl font-[#031846] tracking-tight">
             Start building polished invoices with Invoicy today.
@@ -196,11 +192,11 @@ import Footer from '../components/Footer.vue'
 @reference "tailwindcss";
 
 .feature-chip {
-  @apply border border-orange-100 bg-white transition duration-200;
+  @apply border border-orange-200 bg-white transition duration-200 rounded-md;
 }
 
 .marketing-card {
-  @apply border border-slate-200 bg-white p-6 transition duration-200;
+  @apply border border-slate-200 bg-white p-6 transition duration-200 rounded-md;
 }
 
 .info-card {

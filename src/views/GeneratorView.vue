@@ -2,39 +2,34 @@
   <div class="bg-slate-50 text-[#031846]">
     <Header />
 
-    <main id="main-content" class="mx-auto max-w-6xl px-4 pb-16 pt-24 md:px-6 md:pt-28">
-      <section class="pt-6">
-        <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#E6712B]">
-              Invoice workspace
-            </p>
-            <h1 class="text-3xl  tracking-tight text-[#031846]">Create Invoice</h1>
-          </div>
-          <p class="max-w-xl text-sm text-slate-600">
-            Fill in invoice details, add line items, then generate a downloadable PDF invoice.
-          </p>
-        </div>
-      </section>
-
+    <main id="main-content" class="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-0 md:pt-24">
       <form class="space-y-6 py-8" novalidate @submit.prevent="submitForm">
         <section class="section-card" aria-labelledby="invoice-information-title">
-          <h2 id="invoice-information-title" class="section-title">Invoice Information</h2>
+          <h2 id="invoice-information-title" class="section-title">
+            <span class="section-title-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+            </span>
+            Invoice Information
+          </h2>
 
           <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div>
               <label class="form-label" :for="fieldIds.invoiceNumber">Invoice Number</label>
-              <input
-                :id="fieldIds.invoiceNumber"
-                v-model="form.invoice_number"
-                type="text"
-                name="invoice_number"
-                autocomplete="off"
-                required
-                :aria-invalid="Boolean(validationErrors.invoice_number)"
-                :aria-describedby="validationErrors.invoice_number ? `${fieldIds.invoiceNumber}-error` : undefined"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+                <input
+                  :id="fieldIds.invoiceNumber"
+                  v-model="form.invoice_number"
+                  type="text"
+                  name="invoice_number"
+                  autocomplete="off"
+                  placeholder="INV-0001"
+                  required
+                  :aria-invalid="Boolean(validationErrors.invoice_number)"
+                  :aria-describedby="validationErrors.invoice_number ? `${fieldIds.invoiceNumber}-error` : undefined"
+                  class="form-input has-icon"
+                />
+              </div>
               <p
                 v-if="validationErrors.invoice_number"
                 :id="`${fieldIds.invoiceNumber}-error`"
@@ -46,17 +41,20 @@
 
             <div>
               <label class="form-label" :for="fieldIds.processDate">Process Date</label>
-              <input
-                :id="fieldIds.processDate"
-                v-model="form.process_date"
-                type="date"
-                name="process_date"
-                autocomplete="off"
-                required
-                :aria-invalid="Boolean(validationErrors.process_date)"
-                :aria-describedby="validationErrors.process_date ? `${fieldIds.processDate}-error` : undefined"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <input
+                  :id="fieldIds.processDate"
+                  v-model="form.process_date"
+                  type="date"
+                  name="process_date"
+                  autocomplete="off"
+                  required
+                  :aria-invalid="Boolean(validationErrors.process_date)"
+                  :aria-describedby="validationErrors.process_date ? `${fieldIds.processDate}-error` : undefined"
+                  class="form-input has-icon"
+                />
+              </div>
               <p
                 v-if="validationErrors.process_date"
                 :id="`${fieldIds.processDate}-error`"
@@ -68,17 +66,20 @@
 
             <div>
               <label class="form-label" :for="fieldIds.dueDate">Due Date</label>
-              <input
-                :id="fieldIds.dueDate"
-                v-model="form.due_date"
-                type="date"
-                name="due_date"
-                autocomplete="off"
-                required
-                :aria-invalid="Boolean(validationErrors.due_date)"
-                :aria-describedby="validationErrors.due_date ? `${fieldIds.dueDate}-error` : undefined"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <input
+                  :id="fieldIds.dueDate"
+                  v-model="form.due_date"
+                  type="date"
+                  name="due_date"
+                  autocomplete="off"
+                  required
+                  :aria-invalid="Boolean(validationErrors.due_date)"
+                  :aria-describedby="validationErrors.due_date ? `${fieldIds.dueDate}-error` : undefined"
+                  class="form-input has-icon"
+                />
+              </div>
               <p v-if="validationErrors.due_date" :id="`${fieldIds.dueDate}-error`" class="form-error">
                 {{ validationErrors.due_date }}
               </p>
@@ -87,22 +88,31 @@
         </section>
 
         <section class="section-card" aria-labelledby="customer-details-title">
-          <h2 id="customer-details-title" class="section-title">Customer Details</h2>
+          <h2 id="customer-details-title" class="section-title">
+            <span class="section-title-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+            Customer Details
+          </h2>
 
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <label class="form-label" :for="fieldIds.customerName">Customer Name</label>
-              <input
-                :id="fieldIds.customerName"
-                v-model="form.customer_name"
-                type="text"
-                name="customer_name"
-                autocomplete="organization"
-                required
-                :aria-invalid="Boolean(validationErrors.customer_name)"
-                :aria-describedby="validationErrors.customer_name ? `${fieldIds.customerName}-error` : undefined"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input
+                  :id="fieldIds.customerName"
+                  v-model="form.customer_name"
+                  type="text"
+                  name="customer_name"
+                  autocomplete="organization"
+                  placeholder="Acme Corp."
+                  required
+                  :aria-invalid="Boolean(validationErrors.customer_name)"
+                  :aria-describedby="validationErrors.customer_name ? `${fieldIds.customerName}-error` : undefined"
+                  class="form-input has-icon"
+                />
+              </div>
               <p
                 v-if="validationErrors.customer_name"
                 :id="`${fieldIds.customerName}-error`"
@@ -114,14 +124,18 @@
 
             <div>
               <label class="form-label" :for="fieldIds.customerId">Customer ID</label>
-              <input
-                :id="fieldIds.customerId"
-                v-model="form.customer_id"
-                type="text"
-                name="customer_id"
-                autocomplete="off"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="9" cy="12" r="2.5"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="17" y2="14"/></svg>
+                <input
+                  :id="fieldIds.customerId"
+                  v-model="form.customer_id"
+                  type="text"
+                  name="customer_id"
+                  autocomplete="off"
+                  placeholder="Optional"
+                  class="form-input has-icon"
+                />
+              </div>
             </div>
 
             <div class="md:col-span-2">
@@ -132,6 +146,7 @@
                 name="customer_address"
                 autocomplete="street-address"
                 rows="4"
+                placeholder="Street, City, Postal Code"
                 class="form-input"
               ></textarea>
             </div>
@@ -139,72 +154,97 @@
         </section>
 
         <section class="section-card" aria-labelledby="contact-payment-title">
-          <h2 id="contact-payment-title" class="section-title">Contact & Payment</h2>
+          <h2 id="contact-payment-title" class="section-title">
+            <span class="section-title-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </span>
+            Contact &amp; Payment
+          </h2>
 
           <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div>
               <label class="form-label" :for="fieldIds.previousBalance">Previous Balance</label>
-              <input
-                :id="fieldIds.previousBalance"
-                v-model.number="form.previous_balance"
-                type="number"
-                name="previous_balance"
-                inputmode="decimal"
-                min="0"
-                step="0.01"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <input
+                  :id="fieldIds.previousBalance"
+                  v-model.number="form.previous_balance"
+                  type="number"
+                  name="previous_balance"
+                  inputmode="decimal"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.00"
+                  class="form-input has-icon"
+                />
+              </div>
             </div>
 
             <div>
               <label class="form-label" :for="fieldIds.contactPerson">Contact Person</label>
-              <input
-                :id="fieldIds.contactPerson"
-                v-model="form.contact_person"
-                type="text"
-                name="contact_person"
-                autocomplete="name"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input
+                  :id="fieldIds.contactPerson"
+                  v-model="form.contact_person"
+                  type="text"
+                  name="contact_person"
+                  autocomplete="name"
+                  placeholder="Full name"
+                  class="form-input has-icon"
+                />
+              </div>
             </div>
 
             <div>
               <label class="form-label" :for="fieldIds.contactPhone">Contact Phone</label>
-              <input
-                :id="fieldIds.contactPhone"
-                v-model="form.contact_phone"
-                type="tel"
-                name="contact_phone"
-                autocomplete="tel"
-                inputmode="tel"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input
+                  :id="fieldIds.contactPhone"
+                  v-model="form.contact_phone"
+                  type="tel"
+                  name="contact_phone"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="+62 812 3456 7890"
+                  class="form-input has-icon"
+                />
+              </div>
             </div>
 
             <div>
               <label class="form-label" :for="fieldIds.paymentAccount">Payment Account</label>
-              <input
-                :id="fieldIds.paymentAccount"
-                v-model="form.payment_account"
-                type="text"
-                name="payment_account"
-                autocomplete="off"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>
+                <input
+                  :id="fieldIds.paymentAccount"
+                  v-model="form.payment_account"
+                  type="text"
+                  name="payment_account"
+                  autocomplete="off"
+                  placeholder="Bank · Account number"
+                  class="form-input has-icon"
+                />
+              </div>
             </div>
 
             <div>
               <label class="form-label" :for="fieldIds.contactEmail">Contact Email</label>
-              <input
-                :id="fieldIds.contactEmail"
-                v-model="form.contact_email"
-                type="email"
-                name="contact_email"
-                autocomplete="email"
-                :aria-invalid="Boolean(validationErrors.contact_email)"
-                :aria-describedby="validationErrors.contact_email ? `${fieldIds.contactEmail}-error` : undefined"
-                class="form-input"
-              />
+              <div class="input-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input
+                  :id="fieldIds.contactEmail"
+                  v-model="form.contact_email"
+                  type="email"
+                  name="contact_email"
+                  autocomplete="email"
+                  placeholder="name@company.com"
+                  :aria-invalid="Boolean(validationErrors.contact_email)"
+                  :aria-describedby="validationErrors.contact_email ? `${fieldIds.contactEmail}-error` : undefined"
+                  class="form-input has-icon"
+                />
+              </div>
               <p
                 v-if="validationErrors.contact_email"
                 :id="`${fieldIds.contactEmail}-error`"
@@ -217,19 +257,30 @@
         </section>
 
         <section class="section-card" aria-labelledby="notes-title">
-          <h2 id="notes-title" class="section-title">Notes</h2>
+          <h2 id="notes-title" class="section-title">
+            <span class="section-title-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            </span>
+            Notes
+          </h2>
           <label class="sr-only" :for="fieldIds.notes">Invoice Notes</label>
           <textarea
             :id="fieldIds.notes"
             v-model="form.notes"
             name="notes"
             rows="4"
+            placeholder="Add any additional notes for this invoice..."
             class="form-input"
           ></textarea>
         </section>
 
         <section class="section-card" aria-labelledby="branding-signature-title">
-          <h2 id="branding-signature-title" class="section-title">Branding & Signature</h2>
+          <h2 id="branding-signature-title" class="section-title">
+            <span class="section-title-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            </span>
+            Branding &amp; Signature
+          </h2>
 
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
@@ -245,7 +296,7 @@
                 role="img"
                 :aria-describedby="fieldIds.signatureHelp"
                 aria-label="Signature drawing area"
-                class="mt-2 h-40 w-full cursor-crosshair rounded-xl border-2 border-dashed border-gray-300 bg-white shadow-inner touch-none"
+                class="mt-2 h-40 w-full cursor-crosshair touch-none rounded-xl border-2 border-dashed border-slate-300 bg-gradient-to-br from-slate-50 to-white shadow-inner transition-colors hover:border-[#F99237]/60"
               >
                 Signature canvas for drawing your approval.
               </canvas>
@@ -254,26 +305,28 @@
                 <button
                   type="button"
                   @click="clearSignature"
-                  class="rounded-lg bg-gray-200 px-4 py-2 text-gray-700 transition hover:bg-gray-300"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
                 >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
                   Clear
                 </button>
 
                 <button
                   type="button"
                   @click="saveSignature"
-                  class="rounded-lg cursor-pointer bg-[#F99237] px-4 py-2 font-medium text-white shadow-sm transition hover:bg-[#E6712B]"
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-gradient-to-br from-[#F99237] to-[#f7752a] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:from-[#f7752a] hover:to-[#E6712B] hover:shadow-md"
                 >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                   Save Signature
                 </button>
               </div>
 
-              <div v-if="form.signature_image_path" class="mt-3">
-                <p class="mb-1 text-sm text-gray-600">Preview:</p>
+              <div v-if="form.signature_image_path" class="mt-4">
+                <p class="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Preview</p>
                 <img
                   :src="form.signature_image_path"
                   alt="Preview tanda tangan invoice"
-                  class="h-20 rounded-md border object-contain"
+                  class="h-20 rounded-xl border border-slate-200 bg-white object-contain p-2 shadow-sm"
                 />
               </div>
             </div>
@@ -295,19 +348,20 @@
                 @change="handleLogoUpload"
               />
 
-              <div v-if="form.logo_preview" class="mt-3">
-                <p class="mb-1 text-sm text-gray-600">Preview:</p>
+              <div v-if="form.logo_preview" class="mt-4">
+                <p class="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Preview</p>
                 <img
                   :src="form.logo_preview"
                   alt="Preview logo invoice"
-                  class="h-20 rounded-md border object-contain"
+                  class="h-20 rounded-xl border border-slate-200 bg-white object-contain p-2 shadow-sm"
                 />
 
                 <button
                   type="button"
                   @click="clearLogo"
-                  class="mt-2 rounded-md bg-red-500 px-3 py-1 text-sm text-white transition hover:bg-red-600"
+                  class="mt-3 inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-sm font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-100"
                 >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   Remove Logo
                 </button>
               </div>
@@ -317,13 +371,19 @@
 
         <section class="section-card" aria-labelledby="items-title">
           <div class="mb-3 flex items-center justify-between gap-4">
-            <h2 id="items-title" class="section-title mb-0">Items</h2>
+            <h2 id="items-title" class="section-title mb-0">
+              <span class="section-title-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </span>
+              Items
+            </h2>
 
             <button
               type="button"
               @click="addItem"
-              class="rounded-lg cursor-pointer bg-[#F99237] px-4 py-2 font-medium text-white shadow-sm transition hover:bg-[#E6712B]"
+              class="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-gradient-to-br from-[#F99237] to-[#f7752a] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:from-[#f7752a] hover:to-[#E6712B] hover:shadow-md"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               Add Item
             </button>
           </div>
@@ -333,9 +393,9 @@
           </p>
           <p v-if="validationErrors.items" class="form-error mt-2">{{ validationErrors.items }}</p>
 
-          <div class="mt-4 overflow-x-auto">
-            <table class="min-w-full overflow-hidden rounded-xl border border-gray-200 text-sm">
-              <thead class="bg-orange-50 text-[#F99237]">
+          <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+            <table class="min-w-full text-sm">
+              <thead class="bg-gradient-to-r from-orange-50 via-orange-50/70 to-orange-50/40 text-[#f7752a]">
                 <tr>
                   <th scope="col" class="table-th">Name</th>
                   <th scope="col" class="table-th">Description</th>
@@ -343,15 +403,15 @@
                   <th scope="col" class="table-th">Price</th>
                   <th scope="col" class="table-th">Subtotal</th>
                   <th scope="col" class="table-th">Amount</th>
-                  <th scope="col" class="table-th w-16">Action</th>
+                  <th scope="col" class="table-th w-16 text-center">Action</th>
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody class="divide-y divide-slate-100 bg-white">
                 <tr
                   v-for="(item, index) in form.items"
                   :key="getItemRowKey(index)"
-                  class="gap-2 hover:bg-orange-50"
+                  class="transition-colors hover:bg-orange-50/40"
                 >
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'name')">Item {{ index + 1 }} name</label>
@@ -429,29 +489,29 @@
                       class="form-input"
                     />
                   </td>
-                  <td class="text-center">
+                  <td class="p-2 text-center">
                     <button
                       type="button"
                       :aria-label="`Remove item ${index + 1}`"
-                      class="rounded-md px-2 py-1  text-red-500 transition hover:bg-red-50 hover:text-red-700"
+                      class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-red-500 transition hover:bg-red-50 hover:text-red-700"
                       @click="removeItem(index)"
                     >
-                      Remove
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+                      <span class="sr-only">Remove</span>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </section>
-
-        <section class="section-card flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div class="space-y-2">
+          <div class="mt-6 space-y-2">
             <button
               type="submit"
               :disabled="isSubmitting"
-              class="rounded-lg bg-[#f7752a] px-7 py-3 font-semibold text-white cursor-pointer transition hover:bg-[#E6712B] disabled:bg-[#F99237]"
+              class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-br from-[#F99237] to-[#f7752a] px-7 py-3 font-semibold text-white shadow-md shadow-orange-500/20 transition hover:from-[#f7752a] hover:to-[#E6712B] hover:shadow-lg hover:shadow-orange-500/30 disabled:cursor-not-allowed disabled:from-[#F99237]/60 disabled:to-[#F99237]/60 disabled:shadow-none"
             >
+              <svg v-if="isSubmitting" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 animate-spin" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
               {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
             </button>
             <p class="text-sm text-slate-500" aria-live="polite">
@@ -459,19 +519,21 @@
             </p>
           </div>
 
-          <div v-if="lastCreatedInvoiceId" class="flex flex-wrap items-center gap-3">
+          <div v-if="lastCreatedInvoiceId" class="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-blue-100 bg-blue-50/40 p-4">
             <button
               type="button"
               @click="downloadPdf(lastCreatedInvoiceId)"
               :disabled="isDownloading"
-              class="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow transition hover:bg-blue-700 disabled:bg-blue-300"
+              class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-md shadow-blue-500/20 transition hover:from-blue-700 hover:to-blue-800 disabled:cursor-not-allowed disabled:from-blue-300 disabled:to-blue-300 disabled:shadow-none"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               {{ isDownloading ? 'Downloading...' : 'Download PDF' }}
             </button>
 
-            <span class="text-sm text-gray-500">Invoice ID: {{ lastCreatedInvoiceId }}</span>
+            <span class="text-sm text-slate-600">Invoice ID: <span class="font-mono font-semibold text-[#031846]">{{ lastCreatedInvoiceId }}</span></span>
           </div>
         </section>
+
       </form>
     </main>
 
@@ -490,7 +552,7 @@ const logoFileInput = ref(null)
 const lastCreatedInvoiceId = ref(null)
 const isDownloading = ref(false)
 const isSubmitting = ref(false)
-const statusMessage = ref('Ready to create an invoice.')
+const statusMessage = ref('')
 
 const fieldIds = {
   invoiceNumber: 'invoice-number',
@@ -916,35 +978,68 @@ const submitForm = async () => {
 @reference "tailwindcss";
 
 .form-label {
-  @apply mb-1 block text-sm font-semibold text-gray-700;
+  @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-500;
 }
 
 .form-helper {
-  @apply text-sm leading-6 text-gray-500;
+  @apply text-sm leading-6 text-slate-500;
 }
 
 .form-error {
-  @apply mt-1 text-sm font-medium text-red-600;
+  @apply mt-1.5 flex items-center gap-1 text-sm font-medium text-red-600;
+}
+
+.input-wrap {
+  @apply relative;
+}
+
+.input-icon {
+  @apply pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors duration-150;
+}
+
+.input-wrap:focus-within .input-icon {
+  @apply text-[#F99237];
 }
 
 .form-input {
-  @apply w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 transition duration-150
-    focus:border-[#F99237] focus:bg-white focus:ring-2 focus:ring-orange-200;
+  @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800 shadow-sm transition-all duration-200 placeholder:text-slate-400
+    hover:border-slate-300
+    focus:border-[#F99237] focus:bg-white focus:outline-none focus:ring-4 focus:ring-orange-100;
+}
+
+.form-input.has-icon {
+  @apply pl-11;
 }
 
 .form-input[aria-invalid='true'] {
-  @apply border-red-400 bg-red-50 focus:border-red-500 focus:ring-red-200;
+  @apply border-red-300 bg-red-50/40 focus:border-red-400 focus:ring-red-100;
+}
+
+textarea.form-input {
+  @apply leading-relaxed;
+}
+
+input[type='date'].form-input {
+  @apply pr-3;
+}
+
+input[type='file'].form-input {
+  @apply cursor-pointer p-0 file:mr-4 file:cursor-pointer file:rounded-l-xl file:border-0 file:bg-gradient-to-br file:from-[#F99237] file:to-[#f7752a] file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white file:transition file:hover:from-[#f7752a] file:hover:to-[#E6712B];
 }
 
 .table-th {
-  @apply px-3 py-3 text-left font-semibold text-gray-700;
+  @apply px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider;
 }
 
 .section-card {
-  @apply rounded-xl border border-gray-200 bg-white p-5 shadow-sm;
+  @apply relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_4px_16px_-8px_rgba(15,23,42,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_8px_24px_-12px_rgba(15,23,42,0.10)] sm:p-7;
 }
 
 .section-title {
-  @apply mb-4 flex items-center gap-2 text-lg  text-gray-800;
+  @apply mb-5 flex items-center gap-3 text-lg font-bold tracking-tight text-[#031846];
+}
+
+.section-title-icon {
+  @apply flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-50 to-orange-100 text-[#F99237] shadow-sm ring-1 ring-orange-100;
 }
 </style>

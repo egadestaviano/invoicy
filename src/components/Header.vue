@@ -11,12 +11,14 @@
           <RouterLink 
             to="/" 
             class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
+            active-class="bg-white/20 text-white"
           >
             Home
           </RouterLink>
           <RouterLink 
             to="/generator" 
             class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
+            active-class="bg-white/20 text-white"
           >
             Generator
           </RouterLink>
