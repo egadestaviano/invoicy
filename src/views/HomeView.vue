@@ -10,10 +10,10 @@
               <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#c05a1a]">
                 Meet Invoicy
               </p>
-              <h1 class="max-w-3xl text-4xl md:text-6xl font-[#031846] tracking-tight text-[#031846]">
+              <h1 class="max-w-3xl text-4xl md:text-6xl font-[#031846] tracking-tight leading-none text-[#031846]">
                 Create invoices in minutes with Invoicy.
               </h1>
-              <p class="max-w-2xl text-lg leading-8 text-slate-600">
+              <p class="max-w-2xl text-lg leading-tight text-slate-600">
                 Invoicy helps you draft invoices, add your logo and signature, and download a clean PDF from one focused workflow.
               </p>
             </div>
@@ -36,45 +36,45 @@
             <div class="grid gap-6 sm:grid-cols-3">
               <div class="feature-chip p-5 animate-rise-delay-1">
                 <p class="text-xl font-semibold text-[#031846]">3 steps</p>
-                <p class="mt-1 text-sm text-slate-600">Fill in details, generate the invoice, and download the PDF.</p>
+                <p class="mt-1 text-sm text-slate-600 leading-tight">Fill in details, generate, and download the PDF.</p>
               </div>
               <div class="feature-chip p-5 animate-rise-delay-2">
                 <p class="text-xl font-semibold text-[#031846]">No detours</p>
-                <p class="mt-1 text-sm text-slate-600">Go straight into the billing flow when you are ready to work.</p>
+                <p class="mt-1 text-sm text-slate-600 leading-tight">Start billing when ready.</p>
               </div>
               <div class="feature-chip p-5 animate-rise-delay-3">
                 <p class="text-xl font-semibold text-[#031846]">Brand ready</p>
-                <p class="mt-1 text-sm text-slate-600">Add payment details, your logo, and signature in one place.</p>
+                <p class="mt-1 text-sm text-slate-600 leading-tight">Add payment details, logo, and signature .</p>
               </div>
             </div>
           </div>
 
           <!-- Product Preview Card – flat, no shadow, no float animation -->
-          <div class="relative">
+          <div class="relative select-none animate-rise-delay-2">
             <!-- Floating orbs removed (commented out) -->
             <div class="relative overflow-hidden border border-orange-100 bg-white p-6">
               <div class="flex items-center justify-between border-b border-orange-100 pb-4">
                 <div>
                   <p class="text-sm font-semibold text-[#c05a1a]">Product Preview</p>
-                  <h2 class="mt-1 text-2xl text-[#031846]">Invoicy workflow</h2>
+                  <h2 class="mt-0.5 text-2xl text-[#031846]">Invoicy workflow</h2>
                 </div>
                 <div class="bg-orange-50 px-3 py-1 text-sm font-medium text-[#c05a1a]">
                   PDF ready
                 </div>
               </div>
 
-              <div class="mt-6 space-y-4">
+              <div class="mt-6 space-y-3">
                 <div class="info-card">
                   <p class="text-sm font-semibold text-[#031846]">Invoice details</p>
-                  <p class="mt-2 text-sm text-slate-600">Add invoice number, dates, customer information, notes, and line items.</p>
+                  <p class="mt-1 text-sm text-slate-600">Add invoice number, dates, customer information, notes, and line items.</p>
                 </div>
                 <div class="info-card">
                   <p class="text-sm font-semibold text-[#031846]">Branding and payment</p>
-                  <p class="mt-2 text-sm text-slate-600">Upload your logo, include payment details, and capture a signature.</p>
+                  <p class="mt-1 text-sm text-slate-600">Upload your logo, include payment details, and capture a signature.</p>
                 </div>
                 <div class="info-card-highlight">
                   <p class="text-sm font-semibold text-[#c05a1a]">Ready to send</p>
-                  <p class="mt-2 text-sm text-slate-600">Generate the invoice, then download a polished PDF to share with clients.</p>
+                  <p class="mt-1 text-sm text-slate-600">Generate the invoice, then download a polished PDF to share with clients.</p>
                 </div>
               </div>
             </div>
@@ -85,31 +85,31 @@
       <section id="features" class="px-4 md:px-6 py-8">
         <div class="max-w-6xl mx-auto">
           <div class="max-w-2xl animate-rise">
-            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#c05a1a]">Why teams choose Invoicy</p>
-            <h2 class="mt-3 text-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
+            <p class="text-sm font-semibold uppercase tracking-[0.1em] text-[#c05a1a]">Why teams choose Invoicy</p>
+            <h2 class="mt-2 text-3xl max-w-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
               Everything you need to build a clean invoice without slowing down your workflow.
             </h2>
           </div>
 
           <div class="mt-10 grid gap-6 md:grid-cols-3">
             <article class="marketing-card hover-lift animate-rise-delay-1">
-              <p class="text-sm font-semibold text-[#c05a1a]">Fast to complete</p>
-              <h3 class="mt-3 text-xl text-[#031846]">A focused form built around billing essentials</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold leading-0 text-[#c05a1a]">Fast to complete</p>
+              <h3 class="mt-4 text-xl leading-tight text-[#031846]">A focused form built around billing essentials</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 The core invoice fields are already organized, so you can move from draft to finished invoice with less friction.
               </p>
             </article>
             <article class="marketing-card hover-lift animate-rise-delay-2">
-              <p class="text-sm font-semibold text-[#c05a1a]">Polished output</p>
-              <h3 class="mt-3 text-xl text-[#031846]">Logo, signature, and line items in one smooth flow</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold leading-0 text-[#c05a1a]">Polished output</p>
+              <h3 class="mt-4 text-xl leading-tight text-[#031846]">Logo, signature, and line items in one smooth flow</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 Bring brand identity and payment details into the same workspace instead of bouncing between multiple tools.
               </p>
             </article>
             <article class="marketing-card hover-lift animate-rise-delay-3">
-              <p class="text-sm font-semibold text-[#c05a1a]">Ready to share</p>
-              <h3 class="mt-3 text-xl text-[#031846]">Download a PDF right after the invoice is created</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold leading-0 text-[#c05a1a]">Ready to share</p>
+              <h3 class="mt-4 text-xl leading-tight text-[#031846]">Download a PDF right after the invoice is created</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 Complete the invoice once, then export a PDF that is ready to send to your client right away.
               </p>
             </article>
@@ -121,38 +121,38 @@
         <div class="max-w-6xl mx-auto">
           <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between animate-rise">
             <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#c05a1a]">How it works</p>
-              <h2 class="mt-3 text-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
+              <p class="text-sm font-semibold uppercase tracking-[0.1em] text-[#c05a1a]">How it works</p>
+              <h2 class="mt-2 text-3xl max-w-3xl md:text-4xl font-[#031846] tracking-tight text-[#031846]">
                 Three simple steps from draft to downloadable invoice.
               </h2>
             </div>
-            <RouterLink
+            <!-- <RouterLink
               to="/generator"
               class="text-sm font-semibold text-[#c05a1a] transition hover:text-[#F99237]"
             >
               Open the generator
-            </RouterLink>
+            </RouterLink> -->
           </div>
 
           <div class="mt-10 grid gap-6 md:grid-cols-3">
             <div class="process-card-light hover-lift animate-rise-delay-1">
-              <p class="text-sm font-semibold text-[#F99237]">01</p>
-              <h3 class="mt-4 text-2xl">Add invoice details</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold text-[#F99237] leading-0">01</p>
+              <h3 class="mt-4 text-2xl leading-tight">Add invoice details</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 Fill in customer information, dates, notes, and the line items you want to bill.
               </p>
             </div>
             <div class="process-card-warm hover-lift animate-rise-delay-2">
-              <p class="text-sm font-semibold text-[#c05a1a]">02</p>
-              <h3 class="mt-4 text-2xl text-[#031846]">Apply your branding</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold text-[#c05a1a] leading-0">02</p>
+              <h3 class="mt-4 text-2xl leading-tight text-[#031846]">Apply your branding</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 Upload a logo, add payment information, and save a signature for a more professional finish.
               </p>
             </div>
             <div class="process-card-light hover-lift animate-rise-delay-3">
-              <p class="text-sm font-semibold text-[#c05a1a]">03</p>
-              <h3 class="mt-4 text-2xl text-[#031846]">Generate and download</h3>
-              <p class="mt-3 text-sm leading-7 text-slate-600">
+              <p class="text-sm font-semibold text-[#c05a1a] leading-0">03</p>
+              <h3 class="mt-4 text-2xl leading-tight text-[#031846]">Generate and download</h3>
+              <p class="mt-3 text-sm leading-tight text-slate-600">
                 Submit the invoice, then download the finished PDF to deliver it to your client.
               </p>
             </div>
