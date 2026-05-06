@@ -31,7 +31,7 @@ import appPreview from '@/assets/images/app_preview.png';
 
               <div class="flex flex-col sm:flex-row gap-4 pt-4">
                 <RouterLink to="/generator"
-                  class="inline-flex items-center justify-center rounded bg-[#031846] px-8 py-4 text-base font-semibold text-white transition duration-200 hover:bg-[#0a2663]">
+                  class="inline-flex items-center justify-center rounded bg-[#F99237] px-8 py-4 text-base font-semibold text-white transition duration-200 hover:bg-[#0a2663]">
                   Open Generator
                 </RouterLink>
                 <a href="#features"
@@ -52,19 +52,19 @@ import appPreview from '@/assets/images/app_preview.png';
             <div
               class="text-left border-2 border-slate-100 p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-4xl font-bold text-[#031846]">3 steps</p>
-              <p class="mt-4 text-sm text-slate-500 font-bold uppercase tracking-widest leading-relaxed">Simple
+              <p class="mt-4 text-sm text-slate-500  uppercase tracking-widest leading-relaxed">Simple
                 &<br />streamlined</p>
             </div>
             <div
               class="text-left border-2 border-slate-100 p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-4xl font-bold text-[#031846]">No detours</p>
-              <p class="mt-4 text-sm text-slate-500 font-bold uppercase tracking-widest leading-relaxed">Focused
+              <p class="mt-4 text-sm text-slate-500 uppercase tracking-widest leading-relaxed">Focused
                 on<br />results</p>
             </div>
             <div
               class="text-left border-2 border-slate-100 p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-4xl font-bold text-[#031846]">Brand ready</p>
-              <p class="mt-4 text-sm text-slate-500 font-bold uppercase tracking-widest leading-relaxed">
+              <p class="mt-4 text-sm text-slate-500 uppercase tracking-widest leading-relaxed">
                 Fully<br />customizable</p>
             </div>
           </div>
