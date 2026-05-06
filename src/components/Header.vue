@@ -8,18 +8,13 @@
         </RouterLink>
 
         <nav class="flex gap-1 text-sm font-medium">
-          <RouterLink 
-            to="/" 
-            class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
-            active-class="bg-white/20 text-white"
-          >
+          <RouterLink to="/" class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
+            active-class="bg-white/20 text-white">
             Home
           </RouterLink>
-          <RouterLink 
-            to="/generator" 
+          <RouterLink to="/generator"
             class="px-4 py-2 text-white/90 rounded-md transition hover:bg-white/15 hover:text-white"
-            active-class="bg-white/20 text-white"
-          >
+            active-class="bg-white/20 text-white">
             Generator
           </RouterLink>
         </nav>
