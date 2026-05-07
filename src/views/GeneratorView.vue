@@ -2,7 +2,7 @@
   <div class="bg-slate-50 text-[#031846]">
     <Header />
 
-    <main id="main-content" class="mx-auto max-w-6xl px-4 sm:px-6 pb-12 pt-10 md:pb-16 md:pt-24">
+    <main id="main-content" class="mx-auto max-w-6xl px-4 sm:px-6 pb-12 pt-[77px] md:pb-16 md:pt-28">
       <form class="space-y-4 py-4 md:space-y-6 md:py-8" novalidate @submit.prevent="submitForm">
         <section class="section-card" aria-labelledby="invoice-information-title">
           <h2 id="invoice-information-title" class="section-title">

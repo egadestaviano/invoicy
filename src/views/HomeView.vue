@@ -11,17 +11,17 @@ import appPreview from '@/assets/images/app_preview.png';
   <div class="min-h-screen bg-white text-[#031846]">
     <Header />
 
-    <main class="overflow-x-hidden pt-16 md:pt-32">
+    <main class="pt-[61px]">
       <!-- Hero Section -->
-      <section class="pb-16 md:pb-24">
+      <section class="pb-16 md:pb-24 overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div class="space-y-7 md:space-y-10 text-left pt-8 md:pt-0">
+          <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center py-10 md:py-20">
+            <div class="space-y-6 md:space-y-10 text-left">
               <div class="space-y-4 md:space-y-6">
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#c05a1a]">
                   Introducing Invoicy
                 </p>
-                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-[#031846]">
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] text-[#031846]">
                   Professional invoices,<br />in minutes.
                 </h1>
                 <p class="max-w-xl text-base md:text-xl leading-relaxed text-slate-500">
@@ -29,40 +29,40 @@ import appPreview from '@/assets/images/app_preview.png';
                 </p>
               </div>
 
-              <div class="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
+              <div class="flex flex-col sm:flex-row gap-3 pt-2">
                 <RouterLink to="/generator"
-                  class="inline-flex items-center justify-center rounded bg-[#F99237] px-6 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-semibold text-white transition duration-200 hover:bg-[#0a2663]">
+                  class="inline-flex items-center justify-center rounded bg-[#F99237] px-6 py-3.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#0a2663]">
                   Open Generator
                 </RouterLink>
                 <a href="#features"
-                  class="inline-flex items-center justify-center rounded border border-slate-200 px-6 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-semibold text-slate-600 transition duration-200 hover:bg-slate-50">
+                  class="inline-flex items-center justify-center rounded border border-slate-200 px-6 py-3.5 text-sm font-semibold text-slate-600 transition duration-200 hover:bg-slate-50">
                   Learn More
                 </a>
               </div>
             </div>
 
-            <div class="relative order-first md:order-last">
+            <div class="relative">
               <div class="absolute -inset-4 bg-orange-50/50 rounded-full blur-3xl -z-10"></div>
               <img :src="heroMockup" alt="Professional Invoice Mockup"
-                class="w-full h-auto drop-shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
+                class="w-full max-h-72 md:max-h-none h-auto object-contain drop-shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 max-w-6xl pt-12 md:pt-24 mt-6 md:mt-12">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 pt-8 md:pt-16">
             <div
-              class="text-left border-2 border-slate-100 p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
+              class="text-left border-2 border-slate-100 p-5 sm:p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-3xl md:text-4xl font-bold text-[#031846]">3 steps</p>
               <p class="mt-3 md:mt-4 text-sm text-slate-500 uppercase tracking-widest leading-relaxed">Simple
                 &<br />streamlined</p>
             </div>
             <div
-              class="text-left border-2 border-slate-100 p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
+              class="text-left border-2 border-slate-100 p-5 sm:p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-3xl md:text-4xl font-bold text-[#031846]">No detours</p>
               <p class="mt-3 md:mt-4 text-sm text-slate-500 uppercase tracking-widest leading-relaxed">Focused
                 on<br />results</p>
             </div>
             <div
-              class="text-left border-2 border-slate-100 p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
+              class="text-left border-2 border-slate-100 p-5 sm:p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-3xl md:text-4xl font-bold text-[#031846]">Brand ready</p>
               <p class="mt-3 md:mt-4 text-sm text-slate-500 uppercase tracking-widest leading-relaxed">
                 Fully<br />customizable</p>
@@ -72,7 +72,7 @@ import appPreview from '@/assets/images/app_preview.png';
       </section>
 
       <!-- Product Preview Section -->
-      <section class="bg-slate-50 py-16 md:py-24 border-y-2 border-slate-100">
+      <section class="bg-slate-50 py-16 md:py-24 border-y-2 border-slate-100 overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div class="order-2 md:order-1 relative">
@@ -126,13 +126,13 @@ import appPreview from '@/assets/images/app_preview.png';
         <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
           <div class="max-w-2xl">
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#c05a1a]">Core Philosophy</p>
-            <h2 class="mt-3 md:mt-4 text-3xl md:text-5xl font-bold tracking-tight text-[#031846]">
+            <h2 class="mt-3 text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-[#031846]">
               Designed for clarity and speed.
             </h2>
           </div>
 
           <div class="mt-10 md:mt-20 grid gap-1 grid-cols-1 md:grid-cols-3 border-2 border-slate-100">
-            <article class="p-8 md:p-10 bg-white hover:bg-slate-50 transition-colors border-b-2 md:border-b-0 border-slate-100">
+            <article class="p-6 md:p-10 bg-white hover:bg-slate-50 transition-colors border-b-2 md:border-b-0 border-slate-100">
               <p class="text-xs font-bold text-[#c05a1a] uppercase tracking-widest">Efficiency</p>
               <h3 class="mt-6 md:mt-8 text-xl font-bold text-[#031846]">Billing Essentials</h3>
               <p class="mt-3 md:mt-4 text-slate-500 leading-relaxed text-sm">
@@ -140,7 +140,7 @@ import appPreview from '@/assets/images/app_preview.png';
                 seconds.
               </p>
             </article>
-            <article class="p-8 md:p-10 bg-white hover:bg-slate-50 transition-colors border-b-2 md:border-b-0 md:border-x-2 border-slate-100">
+            <article class="p-6 md:p-10 bg-white hover:bg-slate-50 transition-colors border-b-2 md:border-b-0 md:border-x-2 border-slate-100">
               <p class="text-xs font-bold text-[#c05a1a] uppercase tracking-widest">Aesthetics</p>
               <h3 class="mt-6 md:mt-8 text-xl font-bold text-[#031846]">Polished Output</h3>
               <p class="mt-3 md:mt-4 text-slate-500 leading-relaxed text-sm">
@@ -148,7 +148,7 @@ import appPreview from '@/assets/images/app_preview.png';
                 rigor.
               </p>
             </article>
-            <article class="p-8 md:p-10 bg-white hover:bg-slate-50 transition-colors">
+            <article class="p-6 md:p-10 bg-white hover:bg-slate-50 transition-colors">
               <p class="text-xs font-bold text-[#c05a1a] uppercase tracking-widest">Delivery</p>
               <h3 class="mt-6 md:mt-8 text-xl font-bold text-[#031846]">Instant PDF</h3>
               <p class="mt-3 md:mt-4 text-slate-500 leading-relaxed text-sm">
@@ -164,7 +164,7 @@ import appPreview from '@/assets/images/app_preview.png';
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="max-w-2xl mb-12 md:mb-24">
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-500">The Process</p>
-            <h2 class="mt-3 md:mt-4 text-3xl md:text-5xl font-bold tracking-tight text-slate-800">Three steps to completion.</h2>
+            <h2 class="mt-3 text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-slate-800">Three steps to completion.</h2>
           </div>
 
           <div class="grid gap-10 md:gap-20 grid-cols-1 md:grid-cols-3">
@@ -207,7 +207,7 @@ import appPreview from '@/assets/images/app_preview.png';
         <div class="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-slate-50 blur-3xl opacity-50"></div>
 
         <div class="max-w-3xl mx-auto px-4 sm:px-6 relative">
-          <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-[#031846]">
+          <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-[#031846]">
             Ready to streamline your billing?
           </h2>
           <p class="mt-6 md:mt-8 text-base md:text-xl text-slate-500 max-w-xl mx-auto">
