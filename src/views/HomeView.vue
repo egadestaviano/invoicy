@@ -13,10 +13,18 @@ import appPreview from '@/assets/images/app_preview.png';
 
     <main class="pt-[61px]">
       <!-- Hero Section -->
-      <section class="pb-16 md:pb-24 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center py-10 md:py-20">
-            <div class="space-y-6 md:space-y-10 text-left">
+      <section class="min-h-[calc(100vh-61px)] flex flex-col justify-center overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+          <div class="flex flex-col md:grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-20">
+            <!-- Image First on Mobile -->
+            <div class="order-1 md:order-2 relative w-full">
+              <div class="absolute -inset-4 bg-orange-50/50 rounded-full blur-3xl -z-10"></div>
+              <img :src="heroMockup" alt="Professional Invoice Mockup"
+                class="w-full max-h-64 sm:max-h-80 md:max-h-none h-auto object-contain drop-shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700 mx-auto" />
+            </div>
+
+            <!-- Text Second on Mobile -->
+            <div class="order-2 md:order-1 space-y-6 md:space-y-10 text-left">
               <div class="space-y-4 md:space-y-6">
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#c05a1a]">
                   Introducing Invoicy
@@ -40,15 +48,14 @@ import appPreview from '@/assets/images/app_preview.png';
                 </a>
               </div>
             </div>
-
-            <div class="relative">
-              <div class="absolute -inset-4 bg-orange-50/50 rounded-full blur-3xl -z-10"></div>
-              <img :src="heroMockup" alt="Professional Invoice Mockup"
-                class="w-full max-h-72 md:max-h-none h-auto object-contain drop-shadow-2xl grayscale-[0.2] hover:grayscale-0 transition-all duration-700" />
-            </div>
           </div>
+        </div>
+      </section>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 pt-8 md:pt-16">
+      <!-- Stats/Steps Section -->
+      <section class="py-12 md:py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6">
             <div
               class="text-left border-2 border-slate-100 p-5 sm:p-6 md:p-8 rounded-sm hover:border-[#F99237] transition-colors duration-300">
               <p class="text-3xl md:text-4xl font-bold text-[#031846]">3 steps</p>
