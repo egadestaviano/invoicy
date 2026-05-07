@@ -2,8 +2,8 @@
   <div class="bg-slate-50 text-[#031846]">
     <Header />
 
-    <main id="main-content" class="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-0 md:pt-24">
-      <form class="space-y-6 py-8" novalidate @submit.prevent="submitForm">
+    <main id="main-content" class="mx-auto max-w-6xl px-4 sm:px-6 pb-12 pt-10 md:pb-16 md:pt-24">
+      <form class="space-y-4 py-4 md:space-y-6 md:py-8" novalidate @submit.prevent="submitForm">
         <section class="section-card" aria-labelledby="invoice-information-title">
           <h2 id="invoice-information-title" class="section-title">
             <span class="section-title-icon" aria-hidden="true">
@@ -18,7 +18,7 @@
             Invoice Information
           </h2>
 
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-3">
             <div>
               <label class="form-label" :for="fieldIds.invoiceNumber">Invoice Number</label>
               <div class="input-wrap">
@@ -92,7 +92,7 @@
             Customer Details
           </h2>
 
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-2">
             <div>
               <label class="form-label" :for="fieldIds.customerName">Customer Name</label>
               <div class="input-wrap">
@@ -148,7 +148,7 @@
             Contact &amp; Payment
           </h2>
 
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div class="grid grid-cols-1 gap-3 md:gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
               <label class="form-label" :for="fieldIds.previousBalance">Previous Balance</label>
               <div class="input-wrap">
@@ -254,7 +254,7 @@
             Branding &amp; Signature
           </h2>
 
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2">
             <div>
               <label class="form-label" :for="fieldIds.signatureCanvas">Signature</label>
               <p :id="fieldIds.signatureHelp" class="form-helper">
@@ -279,7 +279,7 @@
                 </button>
 
                 <button type="button" @click="saveSignature"
-                  class="inline-flex cursor-pointer items-center gap-1.5  rouned-sm  bg-[#F99237] px-4 py-2 text-sm font-semibold text-white">
+                  class="inline-flex cursor-pointer items-center gap-1.5 rounded-sm bg-[#F99237] px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
@@ -327,7 +327,7 @@
         </section>
 
         <section class="section-card" aria-labelledby="items-title">
-          <div class="mb-3 flex items-center justify-between gap-4">
+          <div class="mb-3 flex items-center justify-between gap-2">
             <h2 id="items-title" class="section-title mb-0">
               <span class="section-title-icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -341,7 +341,7 @@
             </h2>
 
             <button type="button" @click="addItem"
-              class="inline-flex cursor-pointer items-center gap-1.5 rouned-sm  bg-[#F99237] px-4 py-2 text-sm font-semibold text-white ">
+              class="inline-flex cursor-pointer items-center gap-1.5 rounded-sm bg-[#F99237] px-3 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all active:scale-95 shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
                 <line x1="12" y1="5" x2="12" y2="19" />
@@ -356,9 +356,9 @@
           </p>
           <p v-if="validationErrors.items" class="form-error mt-2">{{ validationErrors.items }}</p>
 
-          <div class="mt-4 overflow-x-auto rounded-sm border border-slate-200 shadow-sm">
-            <table class="min-w-full text-sm">
-              <thead class="bg-gradient-to-r from-orange-50 via-orange-50/70 to-orange-50/40 text-[#f7752a]">
+          <div class="mt-4 overflow-x-auto rounded-sm border border-slate-300/60 shadow-sm bg-white ring-1 ring-slate-100">
+            <table class="min-w-full text-sm border-collapse border-spacing-0">
+              <thead class="bg-white border-b-2 border-slate-100 text-slate-800">
                 <tr>
                   <th scope="col" class="table-th">Name</th>
                   <th scope="col" class="table-th">Description</th>
@@ -370,42 +370,42 @@
                 </tr>
               </thead>
 
-              <tbody class="divide-y divide-slate-100 bg-white">
-                <tr v-for="(item, index) in form.items" :key="getItemRowKey(index)"
-                  class="transition-colors hover:bg-orange-50/40">
+              <tbody class="bg-white">
+                <tr v-for="(item, index) in form.items" :key="item._id"
+                  class="border-b border-orange-50/50 transition-colors hover:bg-orange-50/30">
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'name')">Item {{ index + 1 }} name</label>
                     <input :id="getItemFieldId(index, 'name')" v-model="item.name" type="text"
-                      :name="`items[${index}].name`" class="form-input" />
+                      :name="`items[${index}].name`" class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'description')">
                       Item {{ index + 1 }} description
                     </label>
                     <input :id="getItemFieldId(index, 'description')" v-model="item.description" type="text"
-                      :name="`items[${index}].description`" class="form-input" />
+                      :name="`items[${index}].description`" class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'qty')">Item {{ index + 1 }} quantity</label>
                     <input :id="getItemFieldId(index, 'qty')" v-model.number="item.qty" type="number"
-                      :name="`items[${index}].qty`" inputmode="numeric" min="1" step="1" class="form-input" />
+                      :name="`items[${index}].qty`" inputmode="numeric" min="1" step="1" class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'price')">Item {{ index + 1 }} price</label>
                     <input :id="getItemFieldId(index, 'price')" v-model.number="item.price" type="number"
-                      :name="`items[${index}].price`" inputmode="decimal" min="0" step="0.01" class="form-input" />
+                      :name="`items[${index}].price`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'subtotal')">
                       Item {{ index + 1 }} subtotal
                     </label>
                     <input :id="getItemFieldId(index, 'subtotal')" v-model.number="item.subtotal" type="number"
-                      :name="`items[${index}].subtotal`" inputmode="decimal" min="0" step="0.01" class="form-input" />
+                      :name="`items[${index}].subtotal`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'amount')">Item {{ index + 1 }} amount</label>
                     <input :id="getItemFieldId(index, 'amount')" v-model.number="item.amount" type="number"
-                      :name="`items[${index}].amount`" inputmode="decimal" min="0" step="0.01" class="form-input" />
+                      :name="`items[${index}].amount`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
                   </td>
                   <td class="p-2 text-center">
                     <button type="button" :aria-label="`Remove item ${index + 1}`"
@@ -427,9 +427,9 @@
               </tbody>
             </table>
           </div>
-          <div class="mt-6 space-y-2">
+          <div class="mt-4 space-y-2 md:mt-6">
             <button type="submit" :disabled="isSubmitting"
-              class="inline-flex cursor-pointer items-center gap-2 rouned-sm  bg-[#F99237] px-7 py-3 font-semibold text-white  ">
+              class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#F99237] px-7 py-3 font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all active:scale-95 sm:w-auto">
               <svg v-if="isSubmitting" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="h-5 w-5 animate-spin" aria-hidden="true">
@@ -455,7 +455,7 @@
           </div>
 
           <div v-if="lastCreatedInvoiceId"
-            class="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-blue-100 bg-blue-50/40 p-4">
+            class="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-blue-100 bg-blue-50/40 p-3 md:p-4">
             <button type="button" @click="downloadPdf(lastCreatedInvoiceId)" :disabled="isDownloading"
               class="inline-flex cursor-pointer items-center gap-2 rounded-sm bg-gradient-to-br from-blue-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-md shadow-blue-500/20 transition hover:from-blue-700 hover:to-blue-800 disabled:cursor-not-allowed disabled:from-blue-300 disabled:to-blue-300 disabled:shadow-none">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -520,7 +520,9 @@ const validationErrors = reactive({
   items: '',
 })
 
+let _itemIdCounter = 0
 const createEmptyItem = () => ({
+  _id: ++_itemIdCounter,
   name: '',
   description: '',
   qty: 1,
@@ -951,6 +953,10 @@ const submitForm = async () => {
   @apply border-red-200 bg-red-50/40 focus:border-red-400;
 }
 
+.form-input-table {
+  @apply block w-full rounded-sm border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-orange-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-orange-400/20;
+}
+
 textarea.form-input {
   @apply leading-relaxed;
 }
@@ -960,22 +966,22 @@ input[type='date'].form-input {
 }
 
 input[type='file'].form-input {
-  @apply cursor-pointer p-0 file:mr-4 file:cursor-pointer file:rounded-none file:border-0 file:bg-[#031846] file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white file:transition file:hover:bg-[#0a2663];
+  @apply cursor-pointer p-0 file:mr-4 file:cursor-pointer file:rounded-none file:border-0 file:bg-orange-500 file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white file:transition file:hover:bg-orange-600;
 }
 
 .table-th {
-  @apply px-3 py-3 text-left text-xs font-bold uppercase tracking-widest bg-slate-50 border-b-2 border-slate-100;
+  @apply px-3 py-3 text-left text-xs font-bold uppercase tracking-widest border-b-2 border-orange-100;
 }
 
 .section-card {
-  @apply relative overflow-hidden rounded-sm border-2 border-slate-100 bg-white p-8 sm:p-10 transition-shadow duration-200 hover:shadow-xl hover:shadow-slate-100/50;
+  @apply relative overflow-hidden rounded-sm border-2 border-slate-100 bg-white p-5 sm:p-7 md:p-10 transition-shadow duration-200 hover:shadow-xl hover:shadow-slate-100/50;
 }
 
 .section-title {
-  @apply mb-8 flex items-center gap-3 text-lg font-bold tracking-tight text-[#031846];
+  @apply mb-5 flex items-center gap-3 text-base font-bold tracking-tight text-slate-800 md:mb-8 md:text-lg;
 }
 
 .section-title-icon {
-  @apply flex h-9 w-9 items-center justify-center rounded-sm border-2 border-slate-100 bg-slate-50 text-[#031846];
+  @apply flex h-6 w-6 items-center justify-center text-orange-500;
 }
 </style>
