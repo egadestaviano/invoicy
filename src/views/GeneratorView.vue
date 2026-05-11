@@ -16,6 +16,12 @@
               </svg>
             </span>
             Invoice Information
+            <button type="button" @click="isParserOpen = true" class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 border border-orange-200 bg-orange-500 text-white text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-orange-600 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+              </svg>
+              Magic Fill
+            </button>
           </h2>
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-3">
@@ -356,7 +362,8 @@
           </p>
           <p v-if="validationErrors.items" class="form-error mt-2">{{ validationErrors.items }}</p>
 
-          <div class="mt-4 overflow-x-auto rounded-sm border border-slate-300/60 shadow-sm bg-white ring-1 ring-slate-100">
+          <div
+            class="mt-4 overflow-x-auto rounded-sm border border-slate-300/60 shadow-sm bg-white ring-1 ring-slate-100">
             <table class="min-w-full text-sm border-collapse border-spacing-0">
               <thead class="bg-white border-b-2 border-slate-100 text-slate-800">
                 <tr>
@@ -393,19 +400,22 @@
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'price')">Item {{ index + 1 }} price</label>
                     <input :id="getItemFieldId(index, 'price')" v-model.number="item.price" type="number"
-                      :name="`items[${index}].price`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
+                      :name="`items[${index}].price`" inputmode="decimal" min="0" step="0.01"
+                      class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'subtotal')">
                       Item {{ index + 1 }} subtotal
                     </label>
                     <input :id="getItemFieldId(index, 'subtotal')" v-model.number="item.subtotal" type="number"
-                      :name="`items[${index}].subtotal`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
+                      :name="`items[${index}].subtotal`" inputmode="decimal" min="0" step="0.01"
+                      class="form-input-table" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'amount')">Item {{ index + 1 }} amount</label>
                     <input :id="getItemFieldId(index, 'amount')" v-model.number="item.amount" type="number"
-                      :name="`items[${index}].amount`" inputmode="decimal" min="0" step="0.01" class="form-input-table" />
+                      :name="`items[${index}].amount`" inputmode="decimal" min="0" step="0.01"
+                      class="form-input-table" />
                   </td>
                   <td class="p-2 text-center">
                     <button type="button" :aria-label="`Remove item ${index + 1}`"
@@ -457,7 +467,7 @@
           <div v-if="lastCreatedInvoiceId"
             class="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-blue-100 bg-blue-50/40 p-3 md:p-4">
             <button type="button" @click="downloadPdf(lastCreatedInvoiceId)" :disabled="isDownloading"
-              class="inline-flex cursor-pointer items-center gap-2 rounded-sm bg-gradient-to-br from-blue-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-md shadow-blue-500/20 transition hover:from-blue-700 hover:to-blue-800 disabled:cursor-not-allowed disabled:from-blue-300 disabled:to-blue-300 disabled:shadow-none">
+              class="inline-flex cursor-pointer items-center gap-2 rounded-sm bg-gradient-to-br from-blue-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-md shadow-blue-500/20 transition hover:from-blue-700 hover:to-blue-800 disabled:cursor-not-allowed disabled:from-blue-300 disabled:to-blue-300 disabled:shadow-none cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -476,15 +486,23 @@
     </main>
 
     <Footer />
+
+    <InvoiceParser 
+      :is-open="isParserOpen" 
+      @close="isParserOpen = false" 
+      @parsed="handleAiParsed" 
+    />
   </div>
 </template>
 <script setup>
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import InvoiceParser from '../components/InvoiceParser.vue'
 import invoiceService from '../services/invoiceService.js'
 import SignaturePad from 'signature_pad'
 
+const isParserOpen = ref(false)
 const signatureCanvas = ref(null)
 const logoFileInput = ref(null)
 const lastCreatedInvoiceId = ref(null)
@@ -734,6 +752,28 @@ const addItem = () => {
 
 const removeItem = (index) => {
   form.items.splice(index, 1)
+}
+
+const handleAiParsed = (data) => {
+  // Map AI data to form
+  Object.keys(data).forEach(key => {
+    if (key in form && key !== 'items') {
+      form[key] = data[key]
+    }
+  })
+
+  // Handle items separately to ensure reactive assignment and proper IDs
+  if (data.items && Array.isArray(data.items)) {
+    form.items = data.items.map(item => ({
+      ...createEmptyItem(),
+      ...item
+    }))
+  }
+
+  statusMessage.value = 'Form populated by Magic AI!'
+  setTimeout(() => {
+    statusMessage.value = ''
+  }, 3000)
 }
 
 const validateForm = () => {
