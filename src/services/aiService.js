@@ -28,6 +28,7 @@ export const parseInvoice = async (input, isFile = false) => {
     - contact_phone: Phone number for contact.
     - payment_account: Bank name, account number, or payment instructions.
     - contact_email: Email address for contact.
+    - signature_name: Name of the person authorized to sign the invoice (usually at the bottom).
 
     [Notes]
     - notes: Any additional terms, conditions, or messages.

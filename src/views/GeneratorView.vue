@@ -762,6 +762,22 @@ const handleAiParsed = (data) => {
     }
   })
 
+  // Handle signature_name if present
+  if (data.signature_name && signatureCanvas.value) {
+    const canvas = signatureCanvas.value
+    const ctx = canvas.getContext('2d')
+    if (ctx) {
+      signaturePad.clear()
+      // Use a "signature-like" font
+      ctx.font = 'italic 32px "Dancing Script", "Brush Script MT", cursive'
+      ctx.fillStyle = '#0f172a'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(data.signature_name, canvas.width / 2, canvas.height / 2)
+      form.signature_image_path = canvas.toDataURL()
+    }
+  }
+
   // Handle items separately to ensure reactive assignment and proper IDs
   if (data.items && Array.isArray(data.items)) {
     form.items = data.items.map(item => ({
