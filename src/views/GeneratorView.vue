@@ -26,7 +26,10 @@
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-3">
             <div>
-              <label class="form-label" :for="fieldIds.invoiceNumber">Invoice Number</label>
+              <label class="form-label" :for="fieldIds.invoiceNumber">
+                Invoice Number
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -47,7 +50,10 @@
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.processDate">Process Date</label>
+              <label class="form-label" :for="fieldIds.processDate">
+                Process Date
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -67,7 +73,10 @@
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.dueDate">Due Date</label>
+              <label class="form-label" :for="fieldIds.dueDate">
+                Due Date
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -100,7 +109,10 @@
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-2">
             <div>
-              <label class="form-label" :for="fieldIds.customerName">Customer Name</label>
+              <label class="form-label" :for="fieldIds.customerName">
+                Customer Name
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -156,7 +168,10 @@
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
-              <label class="form-label" :for="fieldIds.previousBalance">Previous Balance</label>
+              <label class="form-label" :for="fieldIds.previousBalance">
+                Previous Balance
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -165,12 +180,21 @@
                 </svg>
                 <input :id="fieldIds.previousBalance" v-model.number="form.previous_balance" type="number"
                   name="previous_balance" inputmode="decimal" min="0" step="0.01" placeholder="0.00"
+                  required
+                  :aria-invalid="Boolean(validationErrors.previous_balance)"
+                  :aria-describedby="validationErrors.previous_balance ? `${fieldIds.previousBalance}-error` : undefined"
                   class="form-input has-icon" />
               </div>
+              <p v-if="validationErrors.previous_balance" :id="`${fieldIds.previousBalance}-error`" class="form-error">
+                {{ validationErrors.previous_balance }}
+              </p>
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.contactPerson">Contact Person</label>
+              <label class="form-label" :for="fieldIds.contactPerson">
+                Contact Person
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -178,12 +202,21 @@
                   <circle cx="12" cy="7" r="4" />
                 </svg>
                 <input :id="fieldIds.contactPerson" v-model="form.contact_person" type="text" name="contact_person"
-                  autocomplete="name" placeholder="Full name" class="form-input has-icon" />
+                  autocomplete="name" placeholder="Full name" required
+                  :aria-invalid="Boolean(validationErrors.contact_person)"
+                  :aria-describedby="validationErrors.contact_person ? `${fieldIds.contactPerson}-error` : undefined"
+                  class="form-input has-icon" />
               </div>
+              <p v-if="validationErrors.contact_person" :id="`${fieldIds.contactPerson}-error`" class="form-error">
+                {{ validationErrors.contact_person }}
+              </p>
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.contactPhone">Contact Phone</label>
+              <label class="form-label" :for="fieldIds.contactPhone">
+                Contact Phone
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -191,12 +224,21 @@
                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 <input :id="fieldIds.contactPhone" v-model="form.contact_phone" type="tel" name="contact_phone"
-                  autocomplete="tel" inputmode="tel" placeholder="+62 812 3456 7890" class="form-input has-icon" />
+                  autocomplete="tel" inputmode="tel" placeholder="+62 812 3456 7890" required
+                  :aria-invalid="Boolean(validationErrors.contact_phone)"
+                  :aria-describedby="validationErrors.contact_phone ? `${fieldIds.contactPhone}-error` : undefined"
+                  class="form-input has-icon" />
               </div>
+              <p v-if="validationErrors.contact_phone" :id="`${fieldIds.contactPhone}-error`" class="form-error">
+                {{ validationErrors.contact_phone }}
+              </p>
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.paymentAccount">Payment Account</label>
+              <label class="form-label" :for="fieldIds.paymentAccount">
+                Payment Account
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -205,12 +247,21 @@
                   <line x1="6" y1="15" x2="10" y2="15" />
                 </svg>
                 <input :id="fieldIds.paymentAccount" v-model="form.payment_account" type="text" name="payment_account"
-                  autocomplete="off" placeholder="Bank · Account number" class="form-input has-icon" />
+                  autocomplete="off" placeholder="Bank · Account number" required
+                  :aria-invalid="Boolean(validationErrors.payment_account)"
+                  :aria-describedby="validationErrors.payment_account ? `${fieldIds.paymentAccount}-error` : undefined"
+                  class="form-input has-icon" />
               </div>
+              <p v-if="validationErrors.payment_account" :id="`${fieldIds.paymentAccount}-error`" class="form-error">
+                {{ validationErrors.payment_account }}
+              </p>
             </div>
 
             <div>
-              <label class="form-label" :for="fieldIds.contactEmail">Contact Email</label>
+              <label class="form-label" :for="fieldIds.contactEmail">
+                Contact Email
+                <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+              </label>
               <div class="input-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon" aria-hidden="true">
@@ -367,10 +418,19 @@
             <table class="min-w-full text-sm border-collapse border-spacing-0">
               <thead class="bg-white border-b-2 border-slate-100 text-slate-800">
                 <tr>
-                  <th scope="col" class="table-th">Name</th>
+                  <th scope="col" class="table-th">
+                    Name
+                    <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+                  </th>
                   <th scope="col" class="table-th">Description</th>
-                  <th scope="col" class="table-th">Qty</th>
-                  <th scope="col" class="table-th">Price</th>
+                  <th scope="col" class="table-th">
+                    Qty
+                    <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+                  </th>
+                  <th scope="col" class="table-th">
+                    Price
+                    <span class="text-red-600 font-bold ml-0.5" aria-hidden="true">*</span>
+                  </th>
                   <th scope="col" class="table-th">Subtotal</th>
                   <th scope="col" class="table-th">Amount</th>
                   <th scope="col" class="table-th w-16 text-center">Action</th>
@@ -536,6 +596,10 @@ const validationErrors = reactive({
   customer_name: '',
   contact_email: '',
   items: '',
+  contact_person: '',
+  contact_phone: '',
+  previous_balance: '',
+  payment_account: '',
 })
 
 let _itemIdCounter = 0
@@ -580,6 +644,10 @@ const clearValidationErrors = () => {
   validationErrors.customer_name = ''
   validationErrors.contact_email = ''
   validationErrors.items = ''
+  validationErrors.contact_person = ''
+  validationErrors.contact_phone = ''
+  validationErrors.previous_balance = ''
+  validationErrors.payment_account = ''
 }
 
 const setFieldError = (field, message) => {
@@ -830,7 +898,35 @@ const validateForm = () => {
     }
   }
 
-  if (form.contact_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contact_email)) {
+  if (!form.contact_person.trim()) {
+    setFieldError('contact_person', 'Contact person is required.')
+    alert('Contact Person is required!')
+    return false
+  }
+
+  if (!form.contact_phone.trim()) {
+    setFieldError('contact_phone', 'Contact phone is required.')
+    alert('Contact Phone is required!')
+    return false
+  }
+
+  if (form.previous_balance === undefined || form.previous_balance === null || String(form.previous_balance).trim() === '') {
+    setFieldError('previous_balance', 'Previous balance is required.')
+    alert('Previous Balance is required!')
+    return false
+  }
+
+  if (!form.payment_account.trim()) {
+    setFieldError('payment_account', 'Payment account is required.')
+    alert('Payment Account is required!')
+    return false
+  }
+
+  if (!form.contact_email.trim()) {
+    setFieldError('contact_email', 'Contact email is required.')
+    alert('Contact Email is required!')
+    return false
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contact_email)) {
     setFieldError('contact_email', 'Please enter a valid email address.')
     alert('Please enter a valid email address!')
     return false
