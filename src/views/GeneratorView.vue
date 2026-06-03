@@ -522,6 +522,13 @@
             <p class="text-sm text-slate-500" aria-live="polite">
               {{ statusMessage }}
             </p>
+            <p class="text-xs text-slate-400">
+              Your draft is automatically saved in this browser and restored after a refresh.
+            </p>
+            <button v-if="draftRestored" type="button" @click="resetForm"
+              class="inline-flex w-fit cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 transition hover:text-red-600">
+              Clear saved draft
+            </button>
           </div>
 
           <div v-if="lastCreatedInvoiceId"
@@ -555,7 +562,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import InvoiceParser from '../components/InvoiceParser.vue'
@@ -569,6 +576,7 @@ const lastCreatedInvoiceId = ref(null)
 const isDownloading = ref(false)
 const isSubmitting = ref(false)
 const statusMessage = ref('')
+const draftRestored = ref(false)
 
 const fieldIds = {
   invoiceNumber: 'invoice-number',
@@ -588,6 +596,8 @@ const fieldIds = {
   logoFile: 'logo-file',
   logoHelp: 'logo-help',
 }
+
+const STORAGE_KEY = 'invoicy-generator-draft'
 
 const validationErrors = reactive({
   invoice_number: '',
@@ -636,6 +646,7 @@ const form = reactive({
 let signaturePad = null
 let handleResize = null
 let onSignatureEnd = null
+let saveDraftTimeout = null
 
 const clearValidationErrors = () => {
   validationErrors.invoice_number = ''
@@ -655,7 +666,145 @@ const setFieldError = (field, message) => {
 }
 
 const getItemFieldId = (index, field) => `item-${index}-${field}`
-const getItemRowKey = (index) => `item-row-${index}`
+
+const readFileAsDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = () => reject(new Error('Failed to read file.'))
+    reader.readAsDataURL(file)
+  })
+
+const dataUrlToFile = async (dataUrl, fileName, fileType) => {
+  const response = await fetch(dataUrl)
+  const blob = await response.blob()
+
+  return new File([blob], fileName, {
+    type: fileType || blob.type || 'application/octet-stream',
+  })
+}
+
+const getDraftPayload = () => ({
+  invoice_number: form.invoice_number,
+  process_date: form.process_date,
+  due_date: form.due_date,
+  customer_name: form.customer_name,
+  customer_id: form.customer_id,
+  customer_address: form.customer_address,
+  previous_balance: form.previous_balance,
+  contact_person: form.contact_person,
+  contact_phone: form.contact_phone,
+  payment_account: form.payment_account,
+  contact_email: form.contact_email,
+  notes: form.notes,
+  signature_image_path: form.signature_image_path,
+  logo_image_path: form.logo_image_path,
+  logo_preview: form.logo_preview,
+  logo_file_name: form.logo_image_file?.name || '',
+  logo_file_type: form.logo_image_file?.type || '',
+  items: form.items.map((item) => ({
+    name: item.name,
+    description: item.description,
+    qty: item.qty,
+    price: item.price,
+    subtotal: item.subtotal,
+    amount: item.amount,
+  })),
+})
+
+const saveDraftToStorage = () => {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      savedAt: new Date().toISOString(),
+      form: getDraftPayload(),
+    }),
+  )
+}
+
+const queueDraftSave = () => {
+  if (saveDraftTimeout) {
+    window.clearTimeout(saveDraftTimeout)
+  }
+
+  saveDraftTimeout = window.setTimeout(() => {
+    saveDraftToStorage()
+    saveDraftTimeout = null
+  }, 300)
+}
+
+const clearSavedDraft = () => {
+  localStorage.removeItem(STORAGE_KEY)
+  draftRestored.value = false
+}
+
+const restoreDraftFromStorage = async () => {
+  const rawDraft = localStorage.getItem(STORAGE_KEY)
+
+  if (!rawDraft) {
+    return
+  }
+
+  try {
+    const parsedDraft = JSON.parse(rawDraft)
+    const savedForm = parsedDraft?.form
+
+    if (!savedForm || typeof savedForm !== 'object') {
+      return
+    }
+
+    const restoredItems = Array.isArray(savedForm.items) && savedForm.items.length > 0
+      ? savedForm.items.map((item) => ({
+          ...createEmptyItem(),
+          name: item?.name || '',
+          description: item?.description || '',
+          qty: Number(item?.qty) || 0,
+          price: Number(item?.price) || 0,
+          subtotal: Number(item?.subtotal) || 0,
+          amount: Number(item?.amount) || 0,
+        }))
+      : [createEmptyItem()]
+
+    Object.assign(form, {
+      invoice_number: savedForm.invoice_number || '',
+      process_date: savedForm.process_date || '',
+      due_date: savedForm.due_date || '',
+      customer_name: savedForm.customer_name || '',
+      customer_id: savedForm.customer_id || '',
+      customer_address: savedForm.customer_address || '',
+      previous_balance: Number(savedForm.previous_balance) || 0,
+      contact_person: savedForm.contact_person || '',
+      contact_phone: savedForm.contact_phone || '',
+      payment_account: savedForm.payment_account || '',
+      contact_email: savedForm.contact_email || '',
+      notes: savedForm.notes || '',
+      signature_image_path: savedForm.signature_image_path || '',
+      logo_image_path: savedForm.logo_image_path || '',
+      logo_preview: savedForm.logo_preview || savedForm.logo_image_path || '',
+      logo_image_file: null,
+      items: restoredItems,
+    })
+
+    if (savedForm.logo_image_path) {
+      form.logo_image_file = await dataUrlToFile(
+        savedForm.logo_image_path,
+        savedForm.logo_file_name || 'invoice-logo.png',
+        savedForm.logo_file_type || 'image/png',
+      )
+    }
+
+    if (signaturePad && form.signature_image_path) {
+      signaturePad.clear()
+      signaturePad.fromDataURL(form.signature_image_path)
+    }
+
+    draftRestored.value = true
+    statusMessage.value = 'Draft restored from your previous session.'
+  } catch (error) {
+    console.error('Failed to restore draft from local storage:', error)
+    clearSavedDraft()
+  }
+}
 
 const resizeSignatureCanvas = () => {
   if (!signatureCanvas.value) {
@@ -701,6 +850,7 @@ onMounted(() => {
   }
 
   window.addEventListener('resize', handleResize)
+  restoreDraftFromStorage()
 })
 
 onUnmounted(() => {
@@ -712,8 +862,9 @@ onUnmounted(() => {
     window.removeEventListener('resize', handleResize)
   }
 
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview)
+  if (saveDraftTimeout) {
+    window.clearTimeout(saveDraftTimeout)
+    saveDraftTimeout = null
   }
 })
 
@@ -736,7 +887,7 @@ const saveSignature = () => {
   alert('Please draw a signature first!')
 }
 
-const handleLogoUpload = (event) => {
+const handleLogoUpload = async (event) => {
   const input = event.target
   const [file] = input.files || []
 
@@ -754,21 +905,22 @@ const handleLogoUpload = (event) => {
     return
   }
 
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview)
+  try {
+    const dataUrl = await readFileAsDataUrl(file)
+    form.logo_image_file = file
+    form.logo_image_path = dataUrl
+    form.logo_preview = dataUrl
+    statusMessage.value = 'Logo selected.'
+  } catch (error) {
+    console.error('Error reading logo file:', error)
+    alert('Failed to read the selected logo file.')
+    input.value = ''
   }
-
-  form.logo_image_file = file
-  form.logo_preview = URL.createObjectURL(file)
-  statusMessage.value = 'Logo selected.'
 }
 
 const clearLogo = () => {
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview)
-  }
-
   form.logo_image_file = null
+  form.logo_image_path = ''
   form.logo_preview = ''
 
   if (logoFileInput.value) {
@@ -779,10 +931,6 @@ const clearLogo = () => {
 }
 
 const resetForm = () => {
-  if (form.logo_preview) {
-    URL.revokeObjectURL(form.logo_preview)
-  }
-
   Object.assign(form, {
     invoice_number: '',
     process_date: '',
@@ -812,6 +960,8 @@ const resetForm = () => {
   if (logoFileInput.value) {
     logoFileInput.value.value = ''
   }
+
+  clearSavedDraft()
 }
 
 const addItem = () => {
@@ -859,6 +1009,14 @@ const handleAiParsed = (data) => {
     statusMessage.value = ''
   }, 3000)
 }
+
+watch(
+  form,
+  () => {
+    queueDraftSave()
+  },
+  { deep: true },
+)
 
 const validateForm = () => {
   clearValidationErrors()
@@ -1015,6 +1173,13 @@ const submitForm = async () => {
 
     if (form.logo_image_file) {
       formData.append('logo', form.logo_image_file)
+    } else if (form.logo_image_path) {
+      const restoredLogoFile = await dataUrlToFile(
+        form.logo_image_path,
+        'invoice-logo.png',
+        'image/png',
+      )
+      formData.append('logo', restoredLogoFile)
     }
 
     validItems.forEach((item, index) => {
