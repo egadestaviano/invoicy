@@ -517,15 +517,15 @@
                     <label class="sr-only" :for="getItemFieldId(index, 'subtotal')">
                       Item {{ index + 1 }} subtotal
                     </label>
-                    <input :id="getItemFieldId(index, 'subtotal')" v-model.number="item.subtotal" type="number"
-                      :name="`items[${index}].subtotal`" inputmode="decimal" min="0" step="0.01"
-                      class="form-input-table" />
+                    <input :id="getItemFieldId(index, 'subtotal')" :value="item.subtotal" type="number"
+                      :name="`items[${index}].subtotal`" disabled
+                      class="form-input-table form-input-table--auto" />
                   </td>
                   <td class="p-2">
                     <label class="sr-only" :for="getItemFieldId(index, 'amount')">Item {{ index + 1 }} amount</label>
-                    <input :id="getItemFieldId(index, 'amount')" v-model.number="item.amount" type="number"
-                      :name="`items[${index}].amount`" inputmode="decimal" min="0" step="0.01"
-                      class="form-input-table" />
+                    <input :id="getItemFieldId(index, 'amount')" :value="item.amount" type="number"
+                      :name="`items[${index}].amount`" disabled
+                      class="form-input-table form-input-table--auto" />
                   </td>
                   <td class="p-2 text-center">
                     <button type="button" :aria-label="`Remove item ${index + 1}`"
@@ -1360,6 +1360,18 @@ const handleAiParsed = (data) => {
 }
 
 watch(
+  () => form.items.map((i) => ({ qty: i.qty, price: i.price })),
+  () => {
+    form.items.forEach((item) => {
+      const subtotal = (Number(item.qty) || 0) * (Number(item.price) || 0)
+      item.subtotal = subtotal
+      item.amount = subtotal
+    })
+  },
+  { deep: true },
+)
+
+watch(
   form,
   () => {
     queueDraftSave()
@@ -1622,6 +1634,10 @@ const submitForm = async () => {
 
 .form-input-table {
   @apply block w-full rounded-sm border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-orange-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-orange-400/20;
+}
+
+.form-input-table--auto {
+  @apply cursor-not-allowed border-slate-100 bg-slate-50 text-slate-500 hover:border-slate-100;
 }
 
 textarea.form-input {
