@@ -16,12 +16,61 @@
               </svg>
             </span>
             Invoice Information
-            <button type="button" @click="isParserOpen = true" class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 border border-orange-200 bg-orange-500 text-white text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-orange-600 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
-                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-              </svg>
-              Magic Fill
-            </button>
+            <div class="ml-auto flex items-center gap-2">
+              <div v-if="savedProfiles.length > 0">
+                <button ref="profilesBtnRef" type="button" @click="toggleProfilesDropdown"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 bg-white text-slate-700 text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-slate-50 cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Profiles ({{ savedProfiles.length }})
+                </button>
+                <Teleport to="body">
+                  <div v-if="showProfilesDropdown"
+                    ref="profilesDropdownRef"
+                    :style="profilesDropdownStyle"
+                    class="w-80 rounded-sm border border-slate-200 bg-white shadow-xl"
+                    :class="savedProfiles.length > 1 ? 'max-h-56 overflow-y-auto' : ''"
+                    @scroll="handleProfilesScroll">
+                    <div v-for="profile in visibleProfiles" :key="profile.id"
+                      class="flex items-center gap-3 border-b border-slate-100 px-3 py-2.5">
+                      <div class="flex shrink-0 flex-col items-center gap-1">
+                        <img v-if="profile.signature_image_path" :src="profile.signature_image_path"
+                          alt="signature" class="h-8 w-16 rounded-sm border border-slate-100 bg-white object-contain" />
+                        <img v-if="profile.logo_image_path" :src="profile.logo_image_path"
+                          alt="logo" class="h-6 w-16 object-contain" />
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate text-sm font-semibold text-slate-700">{{ profile.label }}</p>
+                        <p class="truncate text-xs text-slate-400">{{ profile.contact_phone }}</p>
+                        <p class="truncate text-xs text-slate-400">{{ profile.payment_account }}</p>
+                      </div>
+                      <div class="flex shrink-0 flex-col gap-1">
+                        <button type="button"
+                          @click="applyProfile(profile); closeProfilesDropdown()"
+                          class="cursor-pointer rounded-sm bg-[#F99237] px-2.5 py-1 text-[11px] font-semibold text-white transition hover:bg-orange-600">
+                          Use
+                        </button>
+                        <button type="button" @click="deleteProfile(profile.id)"
+                          class="cursor-pointer rounded-sm border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-500 transition hover:bg-red-100">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                    <div v-if="hasMoreProfiles" class="py-2 text-center text-xs text-slate-400">
+                      Scroll down for more...
+                    </div>
+                  </div>
+                </Teleport>
+              </div>
+              <button type="button" @click="isParserOpen = true" class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-orange-200 bg-orange-500 text-white text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-orange-600 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+                Magic Fill
+              </button>
+            </div>
           </h2>
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-3">
@@ -379,6 +428,7 @@
                   Remove Logo
                 </button>
               </div>
+
             </div>
           </div>
         </section>
@@ -562,7 +612,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import InvoiceParser from '../components/InvoiceParser.vue'
@@ -577,6 +627,87 @@ const isDownloading = ref(false)
 const isSubmitting = ref(false)
 const statusMessage = ref('')
 const draftRestored = ref(false)
+const savedSignatures = ref([])
+const savedLogos = ref([])
+const savedProfiles = ref([])
+const showProfilesDropdown = ref(false)
+const profilesBtnRef = ref(null)
+const profilesDropdownRef = ref(null)
+const profilesDropdownStyle = ref({})
+const profilesVisible = ref(5)
+const PROFILES_PAGE_SIZE = 5
+
+const visibleProfiles = computed(() => savedProfiles.value.slice(0, profilesVisible.value))
+const hasMoreProfiles = computed(() => profilesVisible.value < savedProfiles.value.length)
+
+const getDropdownPosition = () => {
+  if (!profilesBtnRef.value) return null
+  const rect = profilesBtnRef.value.getBoundingClientRect()
+  return {
+    position: 'fixed',
+    top: `${rect.bottom + 6}px`,
+    right: `${window.innerWidth - rect.right}px`,
+    zIndex: 9999,
+  }
+}
+
+const handleProfilesScroll = (e) => {
+  const el = e.currentTarget
+  if (el.scrollHeight - el.scrollTop - el.clientHeight < 60) {
+    profilesVisible.value = Math.min(
+      profilesVisible.value + PROFILES_PAGE_SIZE,
+      savedProfiles.value.length,
+    )
+  }
+}
+
+const onPageScroll = () => {
+  if (!profilesBtnRef.value) { closeProfilesDropdown(); return }
+  const rect = profilesBtnRef.value.getBoundingClientRect()
+  const header = document.querySelector('header')
+  const navbarBottom = header ? header.getBoundingClientRect().bottom : 0
+  if (rect.bottom <= navbarBottom) {
+    closeProfilesDropdown()
+  } else {
+    profilesDropdownStyle.value = getDropdownPosition()
+  }
+}
+
+const closeProfilesDropdown = () => {
+  showProfilesDropdown.value = false
+  document.removeEventListener('click', onClickOutsideProfiles, true)
+  window.removeEventListener('scroll', onPageScroll)
+  window.removeEventListener('resize', onPageScroll)
+}
+
+const onClickOutsideProfiles = (e) => {
+  if (
+    profilesBtnRef.value?.contains(e.target) ||
+    profilesDropdownRef.value?.contains(e.target)
+  ) return
+  closeProfilesDropdown()
+}
+
+const toggleProfilesDropdown = () => {
+  showProfilesDropdown.value = !showProfilesDropdown.value
+  if (showProfilesDropdown.value) {
+    profilesVisible.value = PROFILES_PAGE_SIZE
+    profilesDropdownStyle.value = getDropdownPosition()
+    document.addEventListener('click', onClickOutsideProfiles, true)
+    window.addEventListener('scroll', onPageScroll)
+    window.addEventListener('resize', onPageScroll)
+  } else {
+    document.removeEventListener('click', onClickOutsideProfiles, true)
+    window.removeEventListener('scroll', onPageScroll)
+    window.removeEventListener('resize', onPageScroll)
+  }
+}
+
+const teardownProfilesObserver = () => {
+  document.removeEventListener('click', onClickOutsideProfiles, true)
+  window.removeEventListener('scroll', onPageScroll)
+  window.removeEventListener('resize', onPageScroll)
+}
 
 const fieldIds = {
   invoiceNumber: 'invoice-number',
@@ -598,6 +729,11 @@ const fieldIds = {
 }
 
 const STORAGE_KEY = 'invoicy-generator-draft'
+const SIGNATURE_HISTORY_KEY = 'invoicy-signature-history'
+const LOGO_HISTORY_KEY = 'invoicy-logo-history'
+const SENDER_PROFILE_KEY = 'invoicy-sender-profiles'
+const MAX_SIGNATURE_HISTORY = 5
+const MAX_LOGO_HISTORY = 3
 
 const validationErrors = reactive({
   invoice_number: '',
@@ -647,6 +783,211 @@ let signaturePad = null
 let handleResize = null
 let onSignatureEnd = null
 let saveDraftTimeout = null
+
+const loadSavedSignatures = () => {
+  try {
+    savedSignatures.value = JSON.parse(localStorage.getItem(SIGNATURE_HISTORY_KEY) || '[]')
+  } catch {
+    savedSignatures.value = []
+  }
+}
+
+const loadSavedLogos = () => {
+  try {
+    savedLogos.value = JSON.parse(localStorage.getItem(LOGO_HISTORY_KEY) || '[]')
+  } catch {
+    savedLogos.value = []
+  }
+}
+
+const loadSavedProfiles = () => {
+  try {
+    savedProfiles.value = JSON.parse(localStorage.getItem(SENDER_PROFILE_KEY) || '[]')
+  } catch {
+    savedProfiles.value = []
+  }
+}
+
+const saveSignatureToHistory = () => {
+  if (!form.signature_image_path) return
+
+  const label = form.contact_person?.trim()
+    ? `${form.contact_person} · ${new Date().toLocaleDateString()}`
+    : `Signature · ${new Date().toLocaleDateString()}`
+
+  const entry = {
+    id: Date.now(),
+    label,
+    dataUrl: form.signature_image_path,
+    savedAt: new Date().toISOString(),
+  }
+
+  const updated = [entry, ...savedSignatures.value].slice(0, MAX_SIGNATURE_HISTORY)
+  savedSignatures.value = updated
+  localStorage.setItem(SIGNATURE_HISTORY_KEY, JSON.stringify(updated))
+}
+
+const deleteSignatureFromHistory = (id) => {
+  const updated = savedSignatures.value.filter((s) => s.id !== id)
+  savedSignatures.value = updated
+  localStorage.setItem(SIGNATURE_HISTORY_KEY, JSON.stringify(updated))
+}
+
+const applySignatureFromHistory = (sig) => {
+  form.signature_image_path = sig.dataUrl
+  if (signaturePad) {
+    signaturePad.clear()
+    signaturePad.fromDataURL(sig.dataUrl)
+  }
+  statusMessage.value = 'Signature loaded from history.'
+}
+
+const saveLogoToHistory = () => {
+  if (!form.logo_image_path) return
+
+  const isDuplicate = savedLogos.value.some((l) => l.dataUrl === form.logo_image_path)
+  if (isDuplicate) return
+
+  const label = form.logo_image_file?.name
+    ? form.logo_image_file.name.replace(/\.[^/.]+$/, '')
+    : `Logo · ${new Date().toLocaleDateString()}`
+
+  const entry = {
+    id: Date.now(),
+    label,
+    dataUrl: form.logo_image_path,
+    fileName: form.logo_image_file?.name || 'logo.png',
+    fileType: form.logo_image_file?.type || 'image/png',
+    savedAt: new Date().toISOString(),
+  }
+
+  const updated = [entry, ...savedLogos.value].slice(0, MAX_LOGO_HISTORY)
+  savedLogos.value = updated
+  localStorage.setItem(LOGO_HISTORY_KEY, JSON.stringify(updated))
+}
+
+const deleteLogoFromHistory = (id) => {
+  const updated = savedLogos.value.filter((l) => l.id !== id)
+  savedLogos.value = updated
+  localStorage.setItem(LOGO_HISTORY_KEY, JSON.stringify(updated))
+}
+
+const applyLogoFromHistory = async (logo) => {
+  form.logo_image_path = logo.dataUrl
+  form.logo_preview = logo.dataUrl
+  form.logo_image_file = await dataUrlToFile(logo.dataUrl, logo.fileName, logo.fileType)
+  statusMessage.value = 'Logo loaded from history.'
+}
+
+const saveSenderProfile = () => {
+  if (!form.contact_person?.trim() && !form.payment_account?.trim()) return
+
+  const label = form.contact_person?.trim() || `Profile ${savedProfiles.value.length + 1}`
+
+  const entry = {
+    id: Date.now(),
+    label,
+    // Invoice Information
+    invoice_number: form.invoice_number,
+    process_date: form.process_date,
+    due_date: form.due_date,
+    // Customer Details
+    customer_name: form.customer_name,
+    customer_id: form.customer_id,
+    customer_address: form.customer_address,
+    // Contact & Payment
+    previous_balance: form.previous_balance,
+    contact_person: form.contact_person,
+    contact_phone: form.contact_phone,
+    payment_account: form.payment_account,
+    contact_email: form.contact_email,
+    // Notes
+    notes: form.notes,
+    // Items
+    items: form.items.map((item) => ({
+      name: item.name,
+      description: item.description,
+      qty: item.qty,
+      price: item.price,
+      subtotal: item.subtotal,
+      amount: item.amount,
+    })),
+    // Branding & Signature
+    signature_image_path: form.signature_image_path,
+    logo_image_path: form.logo_image_path,
+    logo_preview: form.logo_preview,
+    logo_file_name: form.logo_image_file?.name || '',
+    logo_file_type: form.logo_image_file?.type || '',
+    savedAt: new Date().toISOString(),
+  }
+
+  const updated = [entry, ...savedProfiles.value].slice(0, 10)
+  savedProfiles.value = updated
+  localStorage.setItem(SENDER_PROFILE_KEY, JSON.stringify(updated))
+}
+
+const deleteProfile = (id) => {
+  const updated = savedProfiles.value.filter((p) => p.id !== id)
+  savedProfiles.value = updated
+  localStorage.setItem(SENDER_PROFILE_KEY, JSON.stringify(updated))
+}
+
+const applyProfile = async (profile) => {
+  // Invoice Information
+  form.invoice_number = profile.invoice_number || ''
+  form.process_date = profile.process_date || ''
+  form.due_date = profile.due_date || ''
+
+  // Customer Details
+  form.customer_name = profile.customer_name || ''
+  form.customer_id = profile.customer_id || ''
+  form.customer_address = profile.customer_address || ''
+
+  // Contact & Payment
+  form.previous_balance = profile.previous_balance ?? 0
+  form.contact_person = profile.contact_person || ''
+  form.contact_phone = profile.contact_phone || ''
+  form.payment_account = profile.payment_account || ''
+  form.contact_email = profile.contact_email || ''
+
+  // Notes
+  form.notes = profile.notes || ''
+
+  // Items
+  if (Array.isArray(profile.items) && profile.items.length > 0) {
+    form.items = profile.items.map((item) => ({
+      ...createEmptyItem(),
+      name: item.name || '',
+      description: item.description || '',
+      qty: Number(item.qty) || 1,
+      price: Number(item.price) || 0,
+      subtotal: Number(item.subtotal) || 0,
+      amount: Number(item.amount) || 0,
+    }))
+  }
+
+  // Signature
+  if (profile.signature_image_path) {
+    form.signature_image_path = profile.signature_image_path
+    if (signaturePad) {
+      signaturePad.clear()
+      signaturePad.fromDataURL(profile.signature_image_path)
+    }
+  }
+
+  // Logo
+  if (profile.logo_image_path) {
+    form.logo_image_path = profile.logo_image_path
+    form.logo_preview = profile.logo_preview || profile.logo_image_path
+    form.logo_image_file = await dataUrlToFile(
+      profile.logo_image_path,
+      profile.logo_file_name || 'logo.png',
+      profile.logo_file_type || 'image/png',
+    )
+  }
+
+  statusMessage.value = `Profile "${profile.label}" loaded.`
+}
 
 const clearValidationErrors = () => {
   validationErrors.invoice_number = ''
@@ -833,6 +1174,9 @@ const resizeSignatureCanvas = () => {
 }
 
 onMounted(() => {
+  loadSavedSignatures()
+  loadSavedLogos()
+  loadSavedProfiles()
   resizeSignatureCanvas()
 
   if (signaturePad) {
@@ -866,6 +1210,9 @@ onUnmounted(() => {
     window.clearTimeout(saveDraftTimeout)
     saveDraftTimeout = null
   }
+
+  teardownProfilesObserver()
+  document.removeEventListener('click', onClickOutsideProfiles, true)
 })
 
 const clearSignature = () => {
@@ -879,6 +1226,7 @@ const clearSignature = () => {
 const saveSignature = () => {
   if (signaturePad && typeof signaturePad.isEmpty === 'function' && !signaturePad.isEmpty()) {
     form.signature_image_path = signaturePad.toDataURL()
+    saveSignatureToHistory()
     statusMessage.value = 'Signature saved.'
     alert('Signature saved successfully!')
     return
@@ -911,6 +1259,7 @@ const handleLogoUpload = async (event) => {
     form.logo_image_path = dataUrl
     form.logo_preview = dataUrl
     statusMessage.value = 'Logo selected.'
+    saveLogoToHistory()
   } catch (error) {
     console.error('Error reading logo file:', error)
     alert('Failed to read the selected logo file.')
@@ -1195,6 +1544,7 @@ const submitForm = async () => {
     const createdInvoiceId = response.data?.data?.id ?? null
 
     alert('Invoice Successfully Created!')
+    saveSenderProfile()
     lastCreatedInvoiceId.value = createdInvoiceId
     statusMessage.value = 'Invoice created successfully.'
 
