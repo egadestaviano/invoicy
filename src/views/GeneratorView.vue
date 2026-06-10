@@ -5,73 +5,30 @@
     <main id="main-content" class="mx-auto max-w-6xl px-4 sm:px-6 pb-12 pt-[77px] md:pb-16 md:pt-28">
       <form class="space-y-4 py-4 md:space-y-6 md:py-8" novalidate @submit.prevent="submitForm">
         <section class="section-card" aria-labelledby="invoice-information-title">
-          <h2 id="invoice-information-title" class="section-title">
-            <span class="section-title-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="9" y1="13" x2="15" y2="13" />
-                <line x1="9" y1="17" x2="13" y2="17" />
-              </svg>
-            </span>
-            Invoice Information
-            <div class="ml-auto flex items-center gap-2">
-              <div v-if="savedProfiles.length > 0">
-                <button ref="profilesBtnRef" type="button" @click="toggleProfilesDropdown"
-                  class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 bg-white text-slate-700 text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-slate-50 cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  Profiles ({{ savedProfiles.length }})
-                </button>
-                <Teleport to="body">
-                  <div v-if="showProfilesDropdown"
-                    ref="profilesDropdownRef"
-                    :style="profilesDropdownStyle"
-                    class="w-80 rounded-sm border border-slate-200 bg-white shadow-xl"
-                    :class="savedProfiles.length > 1 ? 'max-h-56 overflow-y-auto' : ''"
-                    @scroll="handleProfilesScroll">
-                    <div v-for="profile in visibleProfiles" :key="profile.id"
-                      class="flex items-center gap-3 border-b border-slate-100 px-3 py-2.5">
-                      <div class="flex shrink-0 flex-col items-center gap-1">
-                        <img v-if="profile.signature_image_path" :src="profile.signature_image_path"
-                          alt="signature" class="h-8 w-16 rounded-sm border border-slate-100 bg-white object-contain" />
-                        <img v-if="profile.logo_image_path" :src="profile.logo_image_path"
-                          alt="logo" class="h-6 w-16 object-contain" />
-                      </div>
-                      <div class="min-w-0 flex-1">
-                        <p class="truncate text-sm font-semibold text-slate-700">{{ profile.label }}</p>
-                        <p class="truncate text-xs text-slate-400">{{ profile.contact_phone }}</p>
-                        <p class="truncate text-xs text-slate-400">{{ profile.payment_account }}</p>
-                      </div>
-                      <div class="flex shrink-0 flex-col gap-1">
-                        <button type="button"
-                          @click="applyProfile(profile); closeProfilesDropdown()"
-                          class="cursor-pointer rounded-sm bg-[#F99237] px-2.5 py-1 text-[11px] font-semibold text-white transition hover:bg-orange-600">
-                          Use
-                        </button>
-                        <button type="button" @click="deleteProfile(profile.id)"
-                          class="cursor-pointer rounded-sm border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-500 transition hover:bg-red-100">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                    <div v-if="hasMoreProfiles" class="py-2 text-center text-xs text-slate-400">
-                      Scroll down for more...
-                    </div>
-                  </div>
-                </Teleport>
-              </div>
-              <button type="button" @click="isParserOpen = true" class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-orange-200 bg-orange-500 text-white text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 hover:bg-orange-600 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+          <div class="mb-5 flex items-center justify-between gap-3 md:mb-8">
+            <h2 id="invoice-information-title" class="section-title mb-0">
+              <span class="section-title-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="9" y1="13" x2="15" y2="13" />
+                  <line x1="9" y1="17" x2="13" y2="17" />
+                </svg>
+              </span>
+              Invoice Information
+            </h2>
+            <div class="flex items-center gap-2">
+              <button type="button" @click="isParserOpen = true"
+                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-sm border border-[#F99237] bg-[#F99237] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-orange-200 transition-all active:scale-95 hover:bg-orange-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
                   <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
                 </svg>
                 Magic Fill
               </button>
             </div>
-          </h2>
+          </div>
 
           <div class="grid grid-cols-1 gap-3 md:gap-4 md:grid-cols-3">
             <div>
@@ -483,7 +440,9 @@
                   </th>
                   <th scope="col" class="table-th">Subtotal</th>
                   <th scope="col" class="table-th">Amount</th>
-                  <th scope="col" class="table-th w-16 text-center">Action</th>
+                  <th scope="col" class="table-th w-16 text-center">
+                   Action
+                  </th>
                 </tr>
               </thead>
 
@@ -540,7 +499,6 @@
                         <path d="M14 11v6" />
                         <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
                       </svg>
-                      <span class="sr-only">Remove</span>
                     </button>
                   </td>
                 </tr>
@@ -548,27 +506,78 @@
             </table>
           </div>
           <div class="mt-4 space-y-2 md:mt-6">
-            <button type="submit" :disabled="isSubmitting"
-              class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#F99237] px-7 py-3 font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all active:scale-95 sm:w-auto">
-              <svg v-if="isSubmitting" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="h-5 w-5 animate-spin" aria-hidden="true">
-                <line x1="12" y1="2" x2="12" y2="6" />
-                <line x1="12" y1="18" x2="12" y2="22" />
-                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
-                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
-                <line x1="2" y1="12" x2="6" y2="12" />
-                <line x1="18" y1="12" x2="22" y2="12" />
-                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
-                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
-              </svg>
-              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
-                <path d="M22 2L11 13" />
-                <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-              </svg>
-              {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
-            </button>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="submit" :disabled="isSubmitting"
+                class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#F99237] px-7 py-3 font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all active:scale-95 sm:w-auto">
+                <svg v-if="isSubmitting" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="h-5 w-5 animate-spin" aria-hidden="true">
+                  <line x1="12" y1="2" x2="12" y2="6" />
+                  <line x1="12" y1="18" x2="12" y2="22" />
+                  <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+                  <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+                  <line x1="2" y1="12" x2="6" y2="12" />
+                  <line x1="18" y1="12" x2="22" y2="12" />
+                  <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+                  <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
+                  <path d="M22 2L11 13" />
+                  <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+                {{ isSubmitting ? 'Submitting...' : 'Create & Generate Invoice' }}
+              </button>
+              <div v-if="savedProfiles.length > 0">
+                <button ref="profilesBtnRef" type="button" @click="toggleProfilesDropdown"
+                  class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-sm border border-orange-200 bg-white px-7 py-3 font-semibold text-[#F99237] shadow-sm transition-all active:scale-95 hover:border-[#F99237] hover:bg-orange-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                    <path d="M3 3v5h5" />
+                    <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                  History ({{ savedProfiles.length }})
+                </button>
+                <Teleport to="body">
+                  <div v-if="showProfilesDropdown"
+                    ref="profilesDropdownRef"
+                    :style="profilesDropdownStyle"
+                    class="w-80 rounded-sm border border-slate-200 bg-white shadow-xl"
+                    :class="savedProfiles.length > 1 ? 'max-h-56 overflow-y-auto' : ''"
+                    @scroll="handleProfilesScroll">
+                    <div v-for="profile in visibleProfiles" :key="profile.id"
+                      class="flex items-center gap-3 border-b border-slate-100 px-3 py-2.5">
+                      <div class="flex shrink-0 flex-col items-center gap-1">
+                        <img v-if="profile.signature_image_path" :src="profile.signature_image_path"
+                          alt="signature" class="h-8 w-16 rounded-sm border border-slate-100 bg-white object-contain" />
+                        <img v-if="profile.logo_image_path" :src="profile.logo_image_path"
+                          alt="logo" class="h-6 w-16 object-contain" />
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate text-sm font-semibold text-slate-700">{{ profile.label }}</p>
+                        <p class="truncate text-xs text-slate-400">{{ profile.contact_phone }}</p>
+                        <p class="truncate text-xs text-slate-400">{{ profile.payment_account }}</p>
+                      </div>
+                      <div class="flex shrink-0 flex-col gap-1">
+                        <button type="button"
+                          @click="applyProfile(profile); closeProfilesDropdown()"
+                          class="cursor-pointer rounded-sm bg-[#F99237] px-2.5 py-1 text-[11px] font-semibold text-white transition hover:bg-orange-600">
+                          Use
+                        </button>
+                        <button type="button" @click="deleteProfile(profile.id)"
+                          class="cursor-pointer rounded-sm border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-500 transition hover:bg-red-100">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                    <div v-if="hasMoreProfiles" class="py-2 text-center text-xs text-slate-400">
+                      Scroll down for more...
+                    </div>
+                  </div>
+                </Teleport>
+              </div>
+            </div>
             <p class="text-sm text-slate-500" aria-live="polite">
               {{ statusMessage }}
             </p>
@@ -576,7 +585,13 @@
               Your draft is automatically saved in this browser and restored after a refresh.
             </p>
             <button v-if="draftRestored" type="button" @click="resetForm"
-              class="inline-flex w-fit cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 transition hover:text-red-600">
+              class="inline-flex cursor-pointer items-center gap-2 rounded-sm border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-500 shadow-sm transition-all active:scale-95 hover:border-red-300 hover:bg-red-50 hover:text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                <path d="M3 6h18" />
+                <path d="M8 6V4h8v2" />
+                <path d="M19 6l-1 14H6L5 6" />
+              </svg>
               Clear saved draft
             </button>
           </div>
@@ -1139,8 +1154,23 @@ const restoreDraftFromStorage = async () => {
       signaturePad.fromDataURL(form.signature_image_path)
     }
 
-    draftRestored.value = true
-    statusMessage.value = 'Draft restored from your previous session.'
+    const hasMeaningfulData = !!(
+      savedForm.invoice_number ||
+      savedForm.customer_name ||
+      savedForm.customer_id ||
+      savedForm.contact_person ||
+      savedForm.contact_phone ||
+      savedForm.payment_account ||
+      savedForm.notes ||
+      savedForm.signature_image_path ||
+      savedForm.logo_image_path ||
+      (Array.isArray(savedForm.items) && savedForm.items.some((i) => i?.name))
+    )
+
+    draftRestored.value = hasMeaningfulData
+    if (hasMeaningfulData) {
+      statusMessage.value = 'Draft restored from your previous session.'
+    }
   } catch (error) {
     console.error('Failed to restore draft from local storage:', error)
     clearSavedDraft()
