@@ -393,8 +393,8 @@
                     <polyline points="7 3 7 8 15 8" />
                   </svg>
                   Save Signature
-                </button>
-              </div> -->
+                </button>-->
+              </div> 
 
               <div v-if="form.signature_image_path" class="mt-4">
                 <p class="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Preview</p>
