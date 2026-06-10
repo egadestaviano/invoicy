@@ -384,7 +384,7 @@
                   Clear
                 </button>
 
-                <button type="button" @click="saveSignature"
+                <!-- <button type="button" @click="saveSignature"
                   class="inline-flex cursor-pointer items-center gap-1.5 rounded-sm bg-[#F99237] px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
@@ -394,7 +394,7 @@
                   </svg>
                   Save Signature
                 </button>
-              </div>
+              </div> -->
 
               <div v-if="form.signature_image_path" class="mt-4">
                 <p class="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Preview</p>
