@@ -1002,6 +1002,9 @@ const applyProfile = async (profile) => {
   }
 
   statusMessage.value = `Profile "${profile.label}" loaded.`
+
+  await nextTick()
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const clearValidationErrors = () => {
